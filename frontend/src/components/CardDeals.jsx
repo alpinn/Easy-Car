@@ -4,7 +4,7 @@ import CarCard from "./CardCard";
 const CardDeals = () => {
   return (
     <div className="app bg-[#f5f7fc]">
-      <div className="py-12 px-12 mx-auto md:px-16 lg:px-[4.5rem] lg:min-h-screen">
+      <div className="py-12 px-12 mx-auto md:px-16 lg:px-[4.5rem] min-h-screen">
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">
           Most popular cars rental deals
         </h2>
