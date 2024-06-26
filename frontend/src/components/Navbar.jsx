@@ -2,46 +2,42 @@ import react, { useState } from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 
 const Navbar = () => {
-  // const [nav, setNav] = useState(false);
-
-  // const handleNav = () => {
-  //   setNav(!nav);
-  // };
   const [toggleMenu, setToggleMenu] = useState(false);
 
   return (
     <div className="app">
-      <nav>
-        <div className="max-w-full mx-auto">
+      <nav className="sticky top-0 z-40 shadow-md">
+        <div className="relative max-w-full mx-auto">
           <div className="flex mx-auto justify-between w-5/6 ">
             {/* Primary menu and logo */}
-            <div className="flex items-center gap-16 my-12">
+            <div className="flex items-center h-32">
               {/* logo */}
-              <div>
+              <div className="flex items-center">
                 <a
                   href="/"
-                  className="flex gap-1 font-bold text-[#3083ff] items-center text-3xl"
+                  className="font-bold text-[#3083ff] text-3xl"
                 >
                   <span>Easy Car</span>
                 </a>
               </div>
-              {/* primary */}
-              <div className="hidden md:flex gap-10 ">
+            </div>
+            {/* primary */}
+            <div className="hidden md:flex md:px-20 lg:px-40 gap-10">
+              <div className="mt-14">
                 <a
                   href="#"
-                  className="mt-2"
+                  className="p-3 rounded hover:text-white hover:bg-blue-400 hover:ease-out  hover:duration-300"
                 >
                   Jadilah Perental
                 </a>
+              </div>
+              <div className="mt-14">
                 <a
                   href="#"
-                  className="mt-2"
+                  className="p-3 rounded hover:text-white hover:bg-blue-400 hover:ease-out  hover:duration-300"
                 >
                   Sewa Mobil
                 </a>
-                <button className="rounded  text-white bg-blue-500 py-2 px-4 ">
-                  Login
-                </button>
               </div>
             </div>
             {/* secondary */}
@@ -56,6 +52,11 @@ const Navbar = () => {
                   )}
                 </button>
               </div>
+            </div>
+            <div className="hidden md:block lg:block">
+              <button className="rounded mt-12 text-white bg-blue-500 py-2 px-4">
+                Login
+              </button>
             </div>
           </div>
         </div>
