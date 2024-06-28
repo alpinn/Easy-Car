@@ -1,18 +1,34 @@
 import react from "react";
-import Navbar2 from "./components/Navbar2";
-import Hero from "./components/Hero";
-import Works from "./components/Works";
-import CardDeals from "./components/CardDeals";
-import Footer from "./components/Footer";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import Login from "./components/Login";
+import Content from "./pages/Content";
+import Register from "./components/Register";
+import ForgotPassword from "./components/ForgotPassword";
 
 function App() {
   return (
     <div>
-      <Navbar2 />
-      <Hero />
-      <Works />
-      <CardDeals />
-      <Footer />
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/"
+            element={<Content />}
+          />
+          <Route
+            path="/login"
+            element={<Login />}
+          />
+          <Route
+            path="/register"
+            element={<Register />}
+          />
+          <Route
+            path="/lupapassword"
+            element={<ForgotPassword />}
+          />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
