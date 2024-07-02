@@ -1,10 +1,10 @@
 import react from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Login from "./components/Login";
-import Content from "./pages/Content";
-import Register from "./components/Register";
-import ForgotPassword from "./components/ForgotPassword";
+import Login from "./components/forms/LoginForm";
+import Homepage from "./pages/Homepage";
+import Register from "./components/forms/RegisterForm";
+import ForgotPassword from "./components/forms/ForgotPasswordForm";
 
 function App() {
   return (
@@ -13,7 +13,7 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={<Content />}
+            element={<Homepage />}
           />
           <Route
             path="/login"
