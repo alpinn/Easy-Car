@@ -1,8 +1,9 @@
 import React from "react";
 import Layout from "./Layout";
-import Hero from "../components/Hero";
-import ThreeStep from "../components/ThreeStep";
-import CardDeals from "../components/CardDeals";
+import Hero from "../components/templates/Hero";
+import ThreeStep from "../components/templates/ThreeStep";
+import CardDeals from "../components/templates/CardDeals";
+import WhyChooseUs from "../components/templates/WhyChooseUs";
 
 const Homepage = () => {
   return (
@@ -10,6 +11,7 @@ const Homepage = () => {
       <Layout>
         <Hero />
         <ThreeStep />
+        <WhyChooseUs />
         <CardDeals />
       </Layout>
     </div>

@@ -1,7 +1,7 @@
 import React from "react";
-import SearchForm from "./forms/SearchForm";
+import SearchForm from "../forms/SearchForm";
 
-import carImage from "../assets/car.png";
+import carImage from "../../assets/car.png";
 
 const Hero = () => {
   return (
