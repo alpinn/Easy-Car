@@ -11,7 +11,7 @@ const SearchForm = () => {
         action=""
         onSubmit={handleSubmit(onSubmit)}
       >
-        <div className="bg-white rounded-md shadow-md mt-5 xl:mt-24 p-6 md:p-5 lg:p-8">
+        <div className="bg-white rounded-md shadow-md mt-5 xl:mt-24 p-3 md:p-4 lg:p-5">
           <div className="flex flex-col gap-5 md:flex-col lg:flex-row justify-between items-center">
             <div className="md:w-1/3 lg:w-1/4">
               <label

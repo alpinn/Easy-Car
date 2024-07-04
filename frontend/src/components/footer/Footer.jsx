@@ -23,6 +23,18 @@ const Footer = () => {
                   href="#"
                   className="hover:text-gray-300"
                 >
+                  Tentang Kami
+                </a>
+                <a
+                  href="#"
+                  className="hover:text-gray-300"
+                >
+                  Sewa Mobil
+                </a>
+                <a
+                  href="#"
+                  className="hover:text-gray-300"
+                >
                   Cars
                 </a>
               </li>

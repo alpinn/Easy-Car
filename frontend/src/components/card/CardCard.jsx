@@ -1,101 +1,51 @@
 "use client";
 import React from "react";
+import { FaUser } from "react-icons/fa";
+import { GiGearStickPattern, GiCarDoor } from "react-icons/gi";
+import { BsFuelPumpFill } from "react-icons/bs";
 
-const CarCard = () => {
+const CarCard = ({ car, price, rentNow }) => {
   return (
-    <div className="app">
-      <div className="p-4 md:w-[15rem] rounded-lg bg-white shadow-md">
-        <img
-          src=""
-          alt=""
-          className="w-full h-48 rounded-lg object-cover"
-        />
-        <div className="mt-4">
-          <h3 className="text-lg font-bold text-gray-800">AA</h3>
-          <div className="flex items-center mt-2">
-            <span className="text-sm font-bold text-yellow-500">2</span>
-            <span className="text-sm text-gray-600 ml-2">2</span>
+    <div className="rounded-lg shadow-md border border-gray-200 overflow-hidden">
+      <img
+        src={car.image}
+        alt={car.name}
+        className="w-full h-48 object-cover p-4 rounded-lg"
+      />
+      <div className="">
+        <div className="flex justify-between items-center">
+          <h2 className="text-lg font-medium text-gray-800 px-4">{car.name}</h2>
+        </div>
+        <ul className="mt-2 px-4 py-2 text-sm text-gray-600 flex gap-[27rem] lg:gap-[5.5rem]">
+          <div className="mb-2">
+            <li className="flex items-center">
+              <FaUser className="mr-2" />
+              <p>{car.seat} Orang</p>
+            </li>
+            <li className="flex items-center">
+              <GiGearStickPattern className="mr-2" />
+              <p>{car.type}</p>
+            </li>
           </div>
-          <div className="flex mt-4">
-            <div className="flex items-center">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5 text-gray-400"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M17 9V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v6m2-2v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-8m-2 2h-2.5"
-                />
-              </svg>
-              <span className="text-sm text-gray-600 ml-2">2</span>
-            </div>
-            <div className="flex items-center ml-4">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5 text-gray-400"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0 1 18 0z"
-                />
-              </svg>
-              <span className="text-sm text-gray-600 ml-2">asd</span>
-            </div>
+          <div>
+            <li className="flex items-center">
+              <GiCarDoor className="mr-2" />
+              <p>{car.door} Pintu</p>
+            </li>
+            <li className="flex items-center">
+              <BsFuelPumpFill className="mr-2" />
+              <p>{car.fuel}</p>
+            </li>
           </div>
-          <div className="flex mt-4">
-            <div className="flex items-center">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5 text-gray-400"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M13 10V3L4 14h7v7l9-11z"
-                />
-              </svg>
-              <span className="text-sm text-gray-600 ml-2">
-                Air Conditioning
-              </span>
-            </div>
-            <div className="flex items-center ml-4">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5 text-gray-400"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M17 16v2a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h12a2 2 0 012 2v8z"
-                />
-              </svg>
-              <span className="text-sm text-gray-600 ml-2">2 Doors</span>
-            </div>
-          </div>
-          <div className="flex justify-between mt-4">
-            <span className="text-lg font-bold text-gray-800">$1000/day</span>
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-              Rent Now
-            </button>
-          </div>
+        </ul>
+        <div className="border-b"></div>
+        <div className="mt-4 px-4 pb-4 flex justify-between items-center">
+          <span className="text-md font-semibold text-gray-800">
+            {price}/hari
+          </span>
+          <button className="text-blue-500 font-bold py-2 px-4 rounded-md">
+            Rental →
+          </button>
         </div>
       </div>
     </div>
