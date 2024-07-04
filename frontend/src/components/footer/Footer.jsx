@@ -29,7 +29,7 @@ const Footer = () => {
                   href="#"
                   className="hover:text-gray-300"
                 >
-                  Sewa Mobil
+                  Sewa Mobi
                 </a>
                 <a
                   href="#"
