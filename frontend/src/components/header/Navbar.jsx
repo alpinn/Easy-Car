@@ -35,12 +35,12 @@ const Navbar = () => {
         </a>
         <ul className="hidden md:flex space-x-8 sm:pl-0 md:pl-12 lg:pl-20 xl:pl-[9.5rem]">
           <li>
-            <a
-              href="/renter"
+            <Link
+              to="/about-us"
               className="hover:text-blue-500"
             >
               Tentang Kami
-            </a>
+            </Link>
           </li>
           <li>
             <a

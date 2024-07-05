@@ -10,7 +10,7 @@ const CardDeals = () => {
       seat: "2",
       type: "Manual",
       door: "4",
-      price: "Rp. 1,800",
+      price: "Rp. 1.800",
       fuel: "Diesel",
     },
     {
@@ -20,7 +20,7 @@ const CardDeals = () => {
       seat: "2",
       type: "Manual",
       door: "4",
-      price: "Rp. 1,000",
+      price: "Rp. 1.000",
       fuel: "Diesel",
     },
     {
@@ -30,7 +30,7 @@ const CardDeals = () => {
       seat: "2",
       type: "Manual",
       door: "4",
-      price: "Rp. 1,120",
+      price: "Rp. 1.120",
       fuel: "Diesel",
     },
     {
@@ -40,7 +40,7 @@ const CardDeals = () => {
       seat: "2",
       type: "Manual",
       door: "4",
-      price: "Rp. 1,100",
+      price: "Rp. 1.100",
       fuel: "Diesel",
     },
   ];
