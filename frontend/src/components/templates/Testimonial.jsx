@@ -111,7 +111,7 @@ const Testimonial = () => {
     },
     {
       id: 3,
-      name: "Bob Smit",
+      name: "Bob Smith",
       text: "Donec id elit non mi porta gravida at eget metus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
       image:
         "https://techcrunch.com/wp-content/uploads/2016/09/2016_01_23_weebly_45251web.jpg",
