@@ -4,5 +4,17 @@ html,
 body,
 #root {
   font-family: "Poppins", sans-serif;
+  min-height: 100vh;
 }
+/* 
+.slick-prev,
+.slick-next {
+  background: #3083ff !important;
+  width: 40px !important;
+}
+.slick-prev:before,
+.slick-next:before {
+  color: white !important;
+} */
+
 /* Add more styles for responsiveness */

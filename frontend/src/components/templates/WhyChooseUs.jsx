@@ -7,7 +7,7 @@ import { IoChatbubbles } from "react-icons/io5";
 
 const WhyChooseUs = () => {
   return (
-    <div className="bg-[#f5f7fc] min-h-screen">
+    <div className="bg-[#f5f7fc]">
       <div className="container mx-auto px-14 py-24 md:px-16 lg:px-20">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="md:w-100% lg:w-1/2">

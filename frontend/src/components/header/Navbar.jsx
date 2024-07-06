@@ -27,38 +27,42 @@ const Navbar = () => {
       }`}
     >
       <div className="container mx-auto flex h-24 items-center justify-between px-14 lg:px-20">
-        <a
-          href="/"
-          className="font-bold text-[#3083ff] text-3xl"
-        >
-          <span>Easy Car</span>
-        </a>
-        <ul className="hidden md:flex space-x-8 sm:pl-0 md:pl-12 lg:pl-20 xl:pl-[9.5rem]">
-          <li>
-            <Link
-              to="/about-us"
-              className="hover:text-blue-500"
-            >
-              Tentang Kami
-            </Link>
-          </li>
-          <li>
-            <a
-              href="/rental-deals"
-              className="hover:text-blue-500"
-            >
-              Sewa Mobil
-            </a>
-          </li>
-          <li>
-            <a
-              href="/rental-deals"
-              className="hover:text-blue-500"
-            >
-              Kontak Kami
-            </a>
-          </li>
-        </ul>
+        <div>
+          <a
+            href="/"
+            className="font-bold text-[#3083ff] text-3xl"
+          >
+            <span>Easy Car</span>
+          </a>
+        </div>
+        <div>
+          <ul className="hidden md:flex space-x-8 sm:pl-0 md:pl-12 lg:pl-20 xl:pl-[6.5rem]">
+            <li>
+              <Link
+                to="/about-us"
+                className="hover:text-blue-500"
+              >
+                Tentang Kami
+              </Link>
+            </li>
+            <li>
+              <a
+                href="/rental-deals"
+                className="hover:text-blue-500"
+              >
+                Sewa Mobil
+              </a>
+            </li>
+            <li>
+              <a
+                href="/rental-deals"
+                className="hover:text-blue-500"
+              >
+                Kontak Kami
+              </a>
+            </li>
+          </ul>
+        </div>
         <div className="flex gap-6">
           {/* Mobile navigation toggle */}
           <div className="md:hidden flex items-center">

@@ -20,7 +20,7 @@ const CarCard = ({ car, price, rentNow }) => {
           <div className="mb-2">
             <li className="flex items-center">
               <FaUser className="mr-2" />
-              <p>{car.seat} Orang</p>
+              <p>{car.seat}</p>
             </li>
             <li className="flex items-center">
               <GiGearStickPattern className="mr-2" />
@@ -30,7 +30,7 @@ const CarCard = ({ car, price, rentNow }) => {
           <div>
             <li className="flex items-center">
               <GiCarDoor className="mr-2" />
-              <p>{car.door} Pintu</p>
+              <p>{car.door}</p>
             </li>
             <li className="flex items-center">
               <BsFuelPumpFill className="mr-2" />
