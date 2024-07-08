@@ -1,53 +1,124 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
+import { BsFillTelephoneFill } from "react-icons/bs";
+import { FaGlobe, FaTwitter } from "react-icons/fa";
+import { IoMdMail } from "react-icons/io";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-900 text-white py-8">
-      <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row justify-between items-center">
+    <footer className="bg-white dark:bg-gray-900">
+      <div className="mx-auto w-full max-w-screen-xl px-[5.5rem] py-6 lg:py-8">
+        <div className="md:flex md:justify-between">
           <div className="mb-6 md:mb-0">
-            <a
-              href="#"
-              className="text-xl font-bold"
+            <Link
+              to="/"
+              className="flex items-center"
             >
-              Easy Car
-            </a>
-            <p className="mt-2 text-gray-400">Indonesia</p>
-            <p className="mt-2 text-gray-400">+62 1234 56 78</p>
-          </div>
-          <div className="mb-6 md:mb-0">
-            <h3 className="text-lg font-bold mb-4">Our Product</h3>
-            <ul className="space-y-2">
-              <li>
-                <a
-                  href="#"
-                  className="hover:text-gray-300"
-                >
-                  Tentang Kami
-                </a>
-                <a
-                  href="#"
-                  className="hover:text-gray-300"
-                >
-                  Sewa Mobi
-                </a>
-                <a
-                  href="#"
-                  className="hover:text-gray-300"
-                >
-                  Cars
-                </a>
-              </li>
-            </ul>
+              <span className="self-center mb-4 text-3xl font-semibold whitespace-nowrap text-blue-500">
+                Easy Car
+              </span>
+            </Link>
+            <p className="text-white text-lg">Bekasi, Indonesia</p>
+            <div className="flex flex-col md:flex-row justify-between mt-4 gap-2 md:gap-8 mb-2">
+              <div className="flex items-center">
+                <div className="bg-white rounded-full p-2">
+                  <BsFillTelephoneFill />
+                </div>
+                <span className="text-white p-2">+62 812 3456 789</span>
+              </div>
+              <div className="flex items-center">
+                <div className="bg-white rounded-full p-2">
+                  <FaGlobe />
+                </div>
+                <span className="text-white p-2">easycar.com</span>
+              </div>
+            </div>
+            <div className="flex items-center">
+              <div className="bg-white rounded-full p-2">
+                <IoMdMail />
+              </div>
+              <span className="text-white p-2">easycar@mail.com</span>
+            </div>
           </div>
 
-          <div className="mb-6 md:mb-0">
-            <h3 className="text-lg font-bold mb-4">Follow Us</h3>
-            <ul className="flex space-x-4"></ul>
+          <div className="grid grid-cols-2 gap-8 sm:gap-20">
+            <div>
+              <h2 className="mb-6 text-lg font-semibold text-gray-900 uppercase dark:text-white">
+                Menu Utama
+              </h2>
+              <ul className="text-gray-500 dark:text-gray-400 font-medium">
+                <li className="mb-4">
+                  <Link
+                    to="/about-us"
+                    className="hover:underline"
+                  >
+                    Tentang Kami
+                  </Link>
+                </li>
+                <li className="mb-4">
+                  <a
+                    href="https://tailwindcss.com/"
+                    className="hover:underline"
+                  >
+                    Sewa Mobil
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://tailwindcss.com/"
+                    className="hover:underline"
+                  >
+                    Kontak Kami
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h2 className="mb-6 text-lg font-semibold text-gray-900 uppercase dark:text-white">
+                Sosial Media
+              </h2>
+              <ul className="text-gray-500 dark:text-gray-400 font-medium">
+                <li className="mb-4">
+                  <a
+                    href="https://github.com/themesberg/flowbite"
+                    className="hover:underline "
+                  >
+                    Twitter
+                  </a>
+                </li>
+                <li className="mb-4">
+                  <a
+                    href="https://discord.gg/4eeurUVvTy"
+                    className="hover:underline"
+                  >
+                    Facebook
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://discord.gg/4eeurUVvTy"
+                    className="hover:underline"
+                  >
+                    Instagram
+                  </a>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
-        <div className="mt-8 text-center text-gray-400">
-          <p>Copyright 2022 © Carentall. All Rights Reserved.</p>
+        <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+        <div className="text-center">
+          <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
+            © 2024{" "}
+            <a
+              href="https://flowbite.com/"
+              className="hover:underline"
+            >
+              Easy Car™
+            </a>
+            . All Rights Reserved.
+          </span>
         </div>
       </div>
     </footer>

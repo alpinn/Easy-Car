@@ -15,6 +15,7 @@ const Testimonial = () => {
           display: "block",
           background: "#3083ff",
           color: "white",
+          borderRadius: "10px",
         }}
         onClick={onClick}
       />
@@ -31,6 +32,7 @@ const Testimonial = () => {
           display: "block",
           background: "#3083ff",
           color: "white",
+          borderRadius: "10px",
         }}
         onClick={onClick}
       />

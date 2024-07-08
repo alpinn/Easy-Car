@@ -28,12 +28,12 @@ const Navbar = () => {
     >
       <div className="container mx-auto flex h-24 items-center justify-between px-14 lg:px-20">
         <div>
-          <a
-            href="/"
+          <Link
+            to="/"
             className="font-bold text-[#3083ff] text-3xl"
           >
             <span>Easy Car</span>
-          </a>
+          </Link>
         </div>
         <div>
           <ul className="hidden md:flex space-x-8 sm:pl-0 md:pl-12 lg:pl-20 xl:pl-[6.5rem]">
