@@ -31,7 +31,7 @@ const WhyChooseUs = () => {
                     fontSize="20"
                   />
                 </div>
-                <div className="px-4">
+                <div className="p-4">
                   <h3 className="font-bold text-xl">Harga terbaik</h3>
                   <p className="text-[#7d7e80]">
                     Cari harga murah? Kami menawarkan harga 100% murah

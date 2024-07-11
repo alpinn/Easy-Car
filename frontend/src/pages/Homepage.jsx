@@ -5,6 +5,7 @@ import ThreeStep from "../components/templates/ThreeStep";
 import CardDeals from "../components/templates/CardDeals";
 import WhyChooseUs from "../components/templates/WhyChooseUs";
 import Testimonial from "../components/templates/Testimonial";
+import Whatsaap from "../atoms/Whatsaap";
 
 const Homepage = () => {
   return (
@@ -15,6 +16,7 @@ const Homepage = () => {
         <WhyChooseUs />
         <CardDeals />
         <Testimonial />
+        <Whatsaap />
       </Layout>
     </div>
   );

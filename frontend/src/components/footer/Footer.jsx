@@ -20,7 +20,7 @@ const Footer = () => {
               </span>
             </Link>
             <p className="text-white text-lg">Bekasi, Indonesia</p>
-            <div className="flex flex-col md:flex-row justify-between mt-4 gap-2 md:gap-8 mb-2">
+            <div className="flex flex-row md:flex-row justify-between mt-4 gap-2 md:gap-8 mb-2">
               <div className="flex items-center">
                 <div className="bg-white rounded-full p-2">
                   <BsFillTelephoneFill />

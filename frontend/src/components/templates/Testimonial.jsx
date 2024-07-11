@@ -122,7 +122,7 @@ const Testimonial = () => {
 
   return (
     <div className="bg-[#f5f7fc]">
-      <div className=" container mx-auto mt-10 mb-10 px-10 md:px-20 lg:px-28 py-24">
+      <div className=" container mx-auto mt-10 mb-32 px-10 md:px-20 lg:px-28 py-24">
         <div className="text-center font-bold">
           <h2 className="text-xl  text-[#aeb0b5] mb-4 uppercase">
             Testimonials
