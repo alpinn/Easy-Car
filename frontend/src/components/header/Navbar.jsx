@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
+// import ProfilePicture from "../../assets/profile.png";
 
 const Navbar = () => {
   const [isSticky, setIsSticky] = useState(false);
@@ -19,6 +21,19 @@ const Navbar = () => {
   }, []);
 
   const [toggleMenu, setToggleMenu] = useState(false);
+
+  // const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login state
+  // const navigate = useNavigate();
+
+  // const handleLogin = () => {
+  //   // Simulate login logic
+  //   setIsLoggedIn(true);
+  //   navigate("/"); // Redirect to home after login
+  // };
+
+  // const handleLogout = () => {
+  //   setIsLoggedIn(false);
+  // };
 
   return (
     <nav
@@ -54,12 +69,12 @@ const Navbar = () => {
               </a>
             </li>
             <li>
-              <a
-                href="/rental-deals"
+              <Link
+                to="/contact-us"
                 className="hover:text-blue-500"
               >
                 Kontak Kami
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
@@ -76,6 +91,24 @@ const Navbar = () => {
           </div>
         </div>
 
+        {/* <div className="hidden md:flex">
+          {isLoggedIn ? (
+            <button onClick={handleLogout}>
+              <img
+                src={ProfilePicture}
+                alt="Profile"
+                className="rounded-full w-8 h-8"
+              />
+            </button>
+          ) : (
+            <Link
+              onClick={handleLogin}
+              className="rounded  text-white bg-blue-600 py-2 px-4 "
+            >
+              Login
+            </Link>
+          )}
+        </div> */}
         <div className="hidden md:flex">
           <Link
             to="/login"

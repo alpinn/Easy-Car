@@ -7,6 +7,7 @@ import Homepage from "./pages/Homepage";
 import Register from "./components/forms/RegisterForm";
 import ForgotPassword from "./components/forms/ForgotPasswordForm";
 import About from "./pages/About";
+import Contact from "./pages/Contact";
 
 function App() {
   return (
@@ -32,6 +33,10 @@ function App() {
           <Route
             path="/about-us"
             element={<About />}
+          />
+          <Route
+            path="/contact-us"
+            element={<Contact />}
           />
         </Routes>
       </BrowserRouter>

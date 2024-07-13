@@ -34,7 +34,7 @@ const CardDeals = () => {
       fuel: "Diesel",
     },
     {
-      name: "Infiniti Q60 Luxury Car",
+      name: "Infiniti Q60 Luxury Car F-Type",
       image:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZoZHBvthVJEPZ5vfvRzlTQttRV8_DRYow2Q&s",
       seat: "2",
