@@ -1,5 +1,6 @@
 import User from "../models/user-model.js";
 import argon2 from "argon2"
+import jwt from "jsonwebtoken"
 
 export const getUsers = async (req, res) => {
     try {
@@ -27,6 +28,11 @@ export const createUser = async (req, res) => {
     if (existingUser) return res.status(400).json({ msg: "Email already exists" });
 
     const hashPassword = await argon2.hash(password);
+
+    const token = jwt.sign({_id: User._id}, 'secretkey123', {
+        expiresIn: '90d',
+    })
+    
     try {
         await User.create({
             name: name,
@@ -34,37 +40,36 @@ export const createUser = async (req, res) => {
             password: hashPassword,
             role:role,
         });
-        res.status(201).json({msg: "Register succeeded"})
+        res.status(201).json({msg: "Register succeeded", token})
     } catch (error) {
         res.status(400).json({msg: error.message})
     }
 }
 
 export const updateUser = async (req, res) => {
-    const user = await User.updateOne({_id: req.params.id}, {$set: req.body});
+    const user = await User.findById(req.params.id);
+    if (!user) return res.status(404).json({ msg: "User not found" });
 
-    if(!user) return res.status(404).json({msg: "User not found"});
-    const {name, email, password, confirmPassword} = req.body;
+    const { name, email, password, confirmPassword } = req.body;
     let hashPassword;
-    if(password === "" || password === null){
-        hashPassword = user.password
-    }else {
+    if (password === "" || password === null) {
+        hashPassword = user.password;
+    } else {
+        if (password !== confirmPassword) return res.status(400).json({ msg: "Password and Confirm Password are don't match" });
         hashPassword = await argon2.hash(password);
     }
-    if(password !== confirmPassword) return res.status(400).json({msg: "Password and Confirm Password are don't match"})
+
     try {
-        await User.updateOne({
-            name: name,
-            email: email,
-            password: hashPassword
-        }, {
-            where: {
-                _id: user.id
+        await User.updateOne({ _id: req.params.id }, {
+            $set: {
+                name,
+                email,
+                password: hashPassword
             }
         });
-    res.status(200).json({msg: "User updated"})
+        res.status(200).json({ msg: "User updated" });
     } catch (error) {
-        res.status(400).json({msg: error.message})
+        res.status(400).json({ msg: error.message });
     }
 }
 
