@@ -1,7 +1,15 @@
 import React from "react";
+import Layout from "./Layout";
+import BookCar from "../components/templates/BookCar";
 
 const Booking = () => {
-  return <div>Booking</div>;
+  return (
+    <div className="min-h-screen pt-14">
+      <Layout>
+        <BookCar />
+      </Layout>
+    </div>
+  );
 };
 
 export default Booking;

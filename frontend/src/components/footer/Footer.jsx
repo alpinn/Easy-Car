@@ -27,12 +27,12 @@ const Footer = () => {
                 </div>
                 <span className="text-white p-2">+62 812 3456 789</span>
               </div>
-              <div className="flex items-center">
+              {/* <div className="flex items-center">
                 <div className="bg-white rounded-full p-2">
                   <FaGlobe />
                 </div>
                 <span className="text-white p-2">easycar.com</span>
-              </div>
+              </div> */}
             </div>
             <div className="flex items-center">
               <div className="bg-white rounded-full p-2">

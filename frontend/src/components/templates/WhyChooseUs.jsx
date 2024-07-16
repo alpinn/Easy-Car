@@ -25,7 +25,7 @@ const WhyChooseUs = () => {
                 Kami menawarkan pengalaman terbaik dengan penawaran kami
               </p>
               <div className="flex flex-row">
-                <div className="bg-white p-2 rounded-lg shadow-md h-fit mt-2 ">
+                <div className="bg-white p-2 rounded-lg shadow-md h-fit mt-6">
                   <FaWallet
                     color="#3083ff"
                     fontSize="20"

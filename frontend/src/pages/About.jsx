@@ -5,7 +5,7 @@ import Whatsaap from "../atoms/Whatsaap";
 
 const About = () => {
   return (
-    <div>
+    <div className="bg-[#f5f7fc] mt-[7.5rem]">
       <Layout>
         <AboutUs />
         <Whatsaap />

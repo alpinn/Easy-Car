@@ -16,7 +16,7 @@ const CarCard = ({ car, price, rentNow }) => {
         <div className="flex justify-between items-center">
           <h2 className="text-lg font-medium text-gray-800 px-4">{car.name}</h2>
         </div>
-        <ul className="mt-2 px-4 py-2 text-sm text-gray-600 flex gap-[27rem] lg:gap-[5.5rem]">
+        <ul className="mt-2 px-4 py-2 text-sm text-gray-600 flex justify-between">
           <div className="mb-2">
             <li className="flex items-center">
               <FaUser className="mr-2" />

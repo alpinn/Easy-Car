@@ -61,12 +61,12 @@ const Navbar = () => {
               </Link>
             </li>
             <li>
-              <a
-                href="/rental-deals"
+              <Link
+                to="/book-car"
                 className="hover:text-blue-500"
               >
                 Sewa Mobil
-              </a>
+              </Link>
             </li>
             <li>
               <Link

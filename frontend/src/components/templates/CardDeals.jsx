@@ -1,5 +1,6 @@
 import React from "react";
 import CarCard from "../card/CardCard";
+import { Link } from "react-router-dom";
 
 const CardDeals = () => {
   const cars = [
@@ -48,7 +49,7 @@ const CardDeals = () => {
   return (
     <div className="container mx-auto px-16 lg:px-20 py-24">
       <div className="text-center">
-        <h2 className="text-lg text-[#aeb0b5] mb-4 uppercase">
+        <h2 className="text-lg text-[#aeb0b5] mb-4 uppercase font-bold">
           Daftar mobil populer
         </h2>
         <p className="text-3xl font-bold text-gray-800 mb-8">
@@ -65,9 +66,14 @@ const CardDeals = () => {
           />
         ))}
       </div>
-      <div className="mt-8 flex justify-center">
-        <button className="border rounded-full font-medium py-3 px-8">
-          Tampilkan semua mobil →
+      <div className="mt-12 flex justify-center">
+        <button>
+          <Link
+            to="/book-car"
+            className="border rounded-full font-medium py-3 px-8"
+          >
+            <span>Tampilkan semua mobil →</span>
+          </Link>
         </button>
       </div>
     </div>

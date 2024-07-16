@@ -8,6 +8,7 @@ import Register from "./components/forms/RegisterForm";
 import ForgotPassword from "./components/forms/ForgotPasswordForm";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import Booking from "./pages/Booking";
 
 function App() {
   return (
@@ -37,6 +38,10 @@ function App() {
           <Route
             path="/contact-us"
             element={<Contact />}
+          />
+          <Route
+            path="/book-car"
+            element={<Booking />}
           />
         </Routes>
       </BrowserRouter>
