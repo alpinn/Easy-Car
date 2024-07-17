@@ -2,6 +2,9 @@ import User from "../models/user-model.js";
 import argon2  from "argon2";
 
 export const Login = async (req, res) => {
+    if (req.session.userId) {
+        return res.status(400).json({ msg: "You are already logged in" });
+    }
     try {
       const user = await User.findOne({ email: req.body.email });
   
