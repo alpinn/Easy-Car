@@ -5,6 +5,7 @@ import dotenv from "dotenv"
 import mongoose from "mongoose";
 
 import UserRoute from "./routes/user-route.js"
+import AuthRoute from "./routes/auth-route.js"
 
 dotenv.config()
 
@@ -49,6 +50,7 @@ app.use(cors({
 app.use(express.json())
 
 app.use(UserRoute)
+app.use(AuthRoute)
 
 app.listen(process.env.APP_PORT, () => {
     console.log("Server is running");

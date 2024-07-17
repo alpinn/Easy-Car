@@ -1,89 +1,54 @@
 import User from "../models/user-model.js";
-import argon2 from "argon2"
-import jwt from "jsonwebtoken"
+import argon2  from "argon2";
 
-export const getUsers = async (req, res) => {
+export const Login = async (req, res) => {
     try {
-        const response = await User.find();
-        res.status(200).json(response)
+      const user = await User.findOne({ email: req.body.email });
+  
+      if (!user) return res.status(404).json({ msg: "User not found" });
+  
+      const isValid = await argon2.verify(user.password, req.body.password);
+      if (!isValid) return res.status(400).json({ msg: "Email or password is incorrect" });
+  
+      req.session.userId = user._id;
+  
+      res.status(200).json({
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+      });
     } catch (error) {
-        res.status(500).json({msg: error.message})
+      console.error(error);
+      res.status(500).json({ msg: "Internal Server Error" });
     }
-}
+};
 
-export const getUsersById = async (req, res) => {
+export const Me = async (req, res) => {
     try {
-        const response = await User.findById(req.params.id);
-        res.status(200).json(response)
+        if (!req.session.userId) {
+            return res.status(401).json({ msg: "Try to login" });
+        }
+        const user = await User.findById(req.session.userId);
+
+        if (!user) return res.status(404).json({ msg: "User not found" });
+        res.status(200).json(user);
     } catch (error) {
-        res.status(404).json({msg: error.message})
-    }
-
-}
-export const createUser = async (req, res) => {
-    const {name, email, password, confirmPassword, role} = req.body;
-    if(password !== confirmPassword) return res.status(400).json({msg: "Password and Confirm Password are don't match"})
-
-    const existingUser = await User.findOne({ email });
-    if (existingUser) return res.status(400).json({ msg: "Email already exists" });
-
-    const hashPassword = await argon2.hash(password);
-
-    const token = jwt.sign({_id: User._id}, 'secretkey123', {
-        expiresIn: '90d',
-    })
-    
-    try {
-        await User.create({
-            name: name,
-            email: email,
-            password: hashPassword,
-            role:role,
-        });
-        res.status(201).json({msg: "Register succeeded", token})
-    } catch (error) {
-        res.status(400).json({msg: error.message})
+        console.error(error);
+        res.status(500).json({ msg: "Internal Server Error" });
     }
 }
 
-export const updateUser = async (req, res) => {
-    const user = await User.findById(req.params.id);
-    if (!user) return res.status(404).json({ msg: "User not found" });
-
-    const { name, email, password, confirmPassword } = req.body;
-    let hashPassword;
-    if (password === "" || password === null) {
-        hashPassword = user.password;
-    } else {
-        if (password !== confirmPassword) return res.status(400).json({ msg: "Password and Confirm Password are don't match" });
-        hashPassword = await argon2.hash(password);
+export const Logout = (req, res) => {
+    if (!req.session.userId) {
+        return res.status(200).json({ msg: "Already logged out" });
     }
-
-    try {
-        await User.updateOne({ _id: req.params.id }, {
-            $set: {
-                name,
-                email,
-                password: hashPassword
-            }
-        });
-        res.status(200).json({ msg: "User updated" });
-    } catch (error) {
-        res.status(400).json({ msg: error.message });
-    }
-}
-
-export const deleteUser = async (req, res) => {
-    const user = await User.deleteOne({_id: req.params.id})
-    if(!user) return res.status(404).json({msg: "User not found"});
-    try{
-        await User.deleteOne({
-            where: {
-                _id: user.id
-            }
-        })
-    res.status(200).json({msg: "User deleted"})
-    } catch (error) {
-        res.status(400).json({msg: error.message})
-    }
-}
+    req.session.destroy((err) => {
+        if (err) {
+            console.error(err);
+            res.status(400).json({ msg: "Logout failed" });
+        } else {
+            res.status(200).json({ msg: "Logout succeeded" });
+        }
+    });
+};
