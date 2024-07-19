@@ -1,7 +1,32 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
 
 const RegisterForm = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confPassword, setconfPassword] = useState("");
+  const [msg, setMsg] = useState("");
+  const navigate = useNavigate();
+
+  const saveUser = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.post("http://localhost:5000/users", {
+        name: name,
+        email: email,
+        password: password,
+        confirmPassword: confPassword,
+      });
+      navigate("/");
+    } catch (error) {
+      if (error.response) {
+        setMsg(error.response.data.msg);
+      }
+    }
+  };
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
       <div className="bg-white shadow-md rounded-lg px-8 pt-6 pb-8 mb-4 w-[25rem]">
@@ -9,7 +34,11 @@ const RegisterForm = () => {
           <h2 className="text-2xl font-bold text-gray-800">Sign Up</h2>
         </div>
 
-        <form className="space-y-4">
+        <form
+          className="space-y-4"
+          onSubmit={saveUser}
+        >
+          <p className="text-center">{msg}</p>
           <div>
             <label
               htmlFor="nama"
@@ -20,6 +49,8 @@ const RegisterForm = () => {
             <input
               type="text"
               id="nama"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               placeholder="Lorem Ipsum"
             />
@@ -35,6 +66,8 @@ const RegisterForm = () => {
             <input
               type="email"
               id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               placeholder="abcd@mail.com"
             />
@@ -50,6 +83,8 @@ const RegisterForm = () => {
             <input
               type="password"
               id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               placeholder="Password"
             />
@@ -65,6 +100,8 @@ const RegisterForm = () => {
             <input
               type="password"
               id="confirmPassword"
+              value={confPassword}
+              onChange={(e) => setconfPassword(e.target.value)}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               placeholder="Confirm Password"
             />

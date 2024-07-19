@@ -32,7 +32,7 @@ export const createUser = async (req, res) => {
     if (existingUser) return res.status(400).json({ msg: "Email already exists" });
 
     const hashPassword = await argon2.hash(password);
-
+    const userRole = role ? role : 'user';
     const token = jwt.sign({_id: User._id}, process.env.JWT_KEY, {
         expiresIn: '90d',
     })
@@ -42,7 +42,7 @@ export const createUser = async (req, res) => {
             name: name,
             email: email,
             password: hashPassword,
-            role:role,
+            role:userRole,
         });
         res.status(201).json({msg: "Register succeeded", token})
     } catch (error) {

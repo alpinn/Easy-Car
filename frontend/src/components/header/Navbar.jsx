@@ -1,10 +1,26 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+
+import { LogOut, reset, getMe } from "../../features/auth-slice.js";
 
 // import ProfilePicture from "../../assets/profile.png";
 
 const Navbar = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const { user } = useSelector((state) => state.auth);
+
+  const logout = () => {
+    dispatch(LogOut());
+    dispatch(reset());
+    navigate("/");
+  };
+
   const [isSticky, setIsSticky] = useState(false);
 
   useEffect(() => {
@@ -20,20 +36,19 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    dispatch(getMe());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (user) {
+      setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
+    }
+  }, [user]);
+
   const [toggleMenu, setToggleMenu] = useState(false);
-
-  // const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login state
-  // const navigate = useNavigate();
-
-  // const handleLogin = () => {
-  //   // Simulate login logic
-  //   setIsLoggedIn(true);
-  //   navigate("/"); // Redirect to home after login
-  // };
-
-  // const handleLogout = () => {
-  //   setIsLoggedIn(false);
-  // };
 
   return (
     <nav
@@ -76,6 +91,9 @@ const Navbar = () => {
                 Kontak Kami
               </Link>
             </li>
+            <li>
+              <p>{user && user.name}</p>
+            </li>
           </ul>
         </div>
         <div className="flex gap-6">
@@ -110,12 +128,21 @@ const Navbar = () => {
           )}
         </div> */}
         <div className="hidden md:flex">
-          <Link
-            to="/login"
-            className="rounded  text-white bg-blue-600 py-2 px-4 "
-          >
-            Login
-          </Link>
+          {isLoggedIn ? (
+            <button
+              className="rounded  text-white bg-blue-600 py-2 px-4"
+              onClick={logout}
+            >
+              Logout
+            </button>
+          ) : (
+            <Link
+              to="/login"
+              className="rounded  text-white bg-blue-600 py-2 px-4 "
+            >
+              Login
+            </Link>
+          )}
         </div>
       </div>
       {/* mobile navigation */}
