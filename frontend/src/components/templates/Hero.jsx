@@ -6,7 +6,7 @@ import carImage from "../../assets/car.png";
 const Hero = () => {
   return (
     <div className="bg-[#f5f7fc]">
-      <main className="container mx-auto px-14 pt-36 md:px-16 lg:px-20">
+      <main className="container mx-auto px-14 pt-36 md:pt-32 md:px-16 lg:px-20">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="md:w-100% lg:w-1/2">
             <h2 className="text-4xl font-bold mb-8 md:text-5xl lg:text-5xl xl:text-6xl lg:leading-normal">

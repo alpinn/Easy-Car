@@ -3,8 +3,8 @@ import CarImage from "../../assets/carr.jpg";
 
 const AboutUs = () => {
   return (
-    <div className="container mx-auto px-14 pt-20 py-20 md:px-16 lg:px-20 min-h-screen">
-      <div className="flex flex-col md:flex-row gap-0 lg:gap-20">
+    <div className="container mx-auto px-14 py-20 md:px-16 lg:px-20 min-h-screen">
+      <div className="flex flex-col md:flex-row gap-0 lg:gap-20 mt-20">
         <div className="w-100% md:w-1/2 mb-10">
           <h1 className="text-3xl font-medium">
             Kami Membantu Untuk Mendapat Mobil Rental Yang Anda Inginkan.

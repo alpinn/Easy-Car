@@ -119,9 +119,7 @@ const BookCar = () => {
     }));
   };
   return (
-    <div className="container mx-auto px-14 py-20 md:px-16 lg:px-20">
-      <h1 className="text-3xl font-medium mb-4">Sewa Mobil</h1>
-
+    <div className="container mx-auto px-14 py-16 md:px-16 lg:px-20">
       {/* <div className="sticky top-0 h-screen w-64 bg-gray-100 p-4">
         <h2 className="text-lg font-bold">Filters</h2>
         <ul>

@@ -1,5 +1,5 @@
 import React from "react";
-import WhatsappLogo from "../assets/whatsapplogo.png";
+import WhatsappLogo from "../../assets/whatsapplogo.png";
 
 const Whatsaap = () => {
   return (

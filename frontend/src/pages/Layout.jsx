@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "../components/header/Navbar";
+import Navbar from "../components/header/Navbarr";
 import Footer from "../components/footer/Footer";
 import ScrollToTop from "../components/temp/ScrollToTop";
 

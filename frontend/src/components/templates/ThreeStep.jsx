@@ -11,8 +11,8 @@ import MitsubishiLogo from "../../assets/mitsubishi.svg";
 
 const ThreeStep = () => {
   return (
-    <div className="container mx-auto px-4 py-6 lg:mt-12 lg:min-h-screen">
-      <div className="flex flex-row mt-10 justify-center items-center gap-10 md:gap-16 lg:gap-36 mb-10 lg:mb-20">
+    <div className="container mx-auto px-4 py-6 mt-10 lg:min-h-screen">
+      <div className="flex flex-row justify-center items-center gap-10 md:gap-16 lg:gap-36 mb-10 lg:mb-20">
         <img
           src={HondaLogo}
           alt="Logo Honda"

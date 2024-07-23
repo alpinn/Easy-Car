@@ -1,7 +1,7 @@
 import React from "react";
 import Layout from "./Layout";
 import ContactUsForm from "../components/forms/ContactUsForm";
-import Whatsaap from "../atoms/Whatsaap";
+import Whatsaap from "../components/atoms/Whatsaap";
 
 const Contact = () => {
   return (
