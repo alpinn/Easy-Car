@@ -17,8 +17,13 @@ const LoginForm = () => {
     if (user || isSuccess) {
       navigate("/");
     }
-    dispatch(reset());
-  }, [user, isSuccess, dispatch, navigate]);
+  }, [user, isSuccess, navigate]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(reset());
+    };
+  }, [dispatch]);
 
   const Auth = (e) => {
     e.preventDefault();

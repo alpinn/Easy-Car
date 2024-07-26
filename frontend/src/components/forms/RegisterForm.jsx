@@ -19,7 +19,7 @@ const RegisterForm = () => {
         password: password,
         confirmPassword: confPassword,
       });
-      navigate("/");
+      navigate("/login");
     } catch (error) {
       if (error.response) {
         setMsg(error.response.data.msg);

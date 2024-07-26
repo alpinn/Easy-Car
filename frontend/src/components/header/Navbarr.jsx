@@ -33,7 +33,7 @@ const Navbarr = () => {
 
   useEffect(() => {
     dispatch(getMe());
-  }, [dispatch, user]);
+  }, [dispatch]);
 
   useEffect(() => {
     const handleScroll = () => {

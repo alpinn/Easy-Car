@@ -1,30 +1,39 @@
 import User from "../models/user-model.js";
 import argon2  from "argon2";
+import jwt from "jsonwebtoken"
+import dotenv from "dotenv"
+import nodemailer from "nodemailer"
+
+dotenv.config()
 
 export const Login = async (req, res) => {
     if (req.session.userId) {
         return res.status(400).json({ msg: "You are already logged in" });
     }
     try {
-      const user = await User.findOne({ email: req.body.email });
-  
-      if (!user) return res.status(404).json({ msg: "User not found" });
-  
-      const isValid = await argon2.verify(user.password, req.body.password);
-      if (!isValid) return res.status(400).json({ msg: "Email or password is incorrect" });
-  
-      req.session.userId = user._id;
-  
-      res.status(200).json({
-        _id: user._id,
-        name: user.name,
-        email: user.email,
-        role: user.role,
-      });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ msg: "Internal Server Error" });
-    }
+        const { email, password } = req.body;
+        if (!email || !password) {
+            return res.status(400).json({ msg: "Email and password are required" });
+        }
+        const user = await User.findOne({ email });
+    
+        if (!user) return res.status(404).json({ msg: "User not found" });
+    
+        const isValid = await argon2.verify(user.password, password);
+        if (!isValid) return res.status(400).json({ msg: "Email or password is incorrect" });
+    
+        req.session.userId = user._id;
+    
+        res.status(200).json({
+            _id: user._id,
+            name: user.name,
+            email: user.email,
+            role: user.role,
+        });
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ msg: "Internal Server Error" });
+        }
 };
 
 export const Me = async (req, res) => {
@@ -53,5 +62,92 @@ export const Logout = (req, res) => {
         } else {
             res.status(200).json({ msg: "Logout succeeded" });
         }
-    });
+    })
 };
+
+export const forgetPassword = async (req, res) => {
+    try {
+        const { email } = req.body;
+        if (!email) {
+            return res.status(400).json({ msg: "Email is required" });
+        }
+        const user = await User.findOne({ email });
+
+        // If user not found, send error message
+        if (!user) {
+            return res.status(404).json({ msg: "User not found" });
+        }
+
+        // Generate a unique JWT token for the user that contains the user's id
+        const token = jwt.sign({_id: user._id}, process.env.JWT_KEY, {
+            expiresIn: '90d',
+        })
+        // Send the token to the user's email
+        const transporter = nodemailer.createTransport({
+            service: "gmail",
+            auth: {
+                user: process.env.EMAIL,
+                pass: process.env.PASSWORD_APP_EMAIL,
+            },
+            debug:true,
+        });
+
+        // Email configuration
+        const mailOptions = {
+            from: process.env.EMAIL,
+            to: email,
+            subject: "Reset Password",
+            html: `<h1>Reset Your Password</h1>
+            <p>Click on the following link to reset your password:</p>
+            <a href="http://localhost:5173/reset-password/${token}">http://localhost:5173/reset-password/${token}</a>
+            <p>The link will expire in 10 minutes.</p>
+            <p>If you didn't request a password reset, please ignore this email.</p>`,
+        };
+
+        // Send the email
+        transporter.sendMail(mailOptions, (err, info) => {
+            if (err) {
+                return res.status(500).json({ msg: err.message });
+            } else {
+                return res.json({ msg: "Email sent successfully" });
+            }
+        });
+    } catch (err) {
+        res.status(500).json({ msg: err.message });
+    }
+};
+
+export const resetPassword = async (req, res) => {
+    try {
+        const { token, newPassword } = req.params;
+        if (!token || !newPassword) {
+            return res.status(400).json({ msg: "Token and new password are required" });
+        }
+      // Verify the token sent by the user
+        const decodedToken = jwt.verify(token, process.env.JWT_KEY);
+  
+      // If the token is invalid, return an error
+        if (!decodedToken) {
+        return res.status(401).json({ msg: "Invalid token" });
+        }
+  
+      // find the user with the id from the token
+      const user = await User.findOne({ _id: decodedToken._id });
+      if (!user) {
+        return res.status(401).json({ msg: "User Not Found" });
+      }
+      
+      // Hash the new password
+      const hashedPassword = await argon2.hash(newPassword);
+  
+      // Update user's password, clear reset token and expiration time
+      user.password = hashedPassword;
+      await user.save();
+  
+      // Send success response
+      res.status(200).json({ message: "Password updated" });
+    } catch (err) {
+      // Send error response if any error occurs
+      res.status(500).json({ message: err.message });
+    }
+  };
