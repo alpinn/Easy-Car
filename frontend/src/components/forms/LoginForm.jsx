@@ -41,7 +41,7 @@ const LoginForm = () => {
           className="space-y-4"
           onSubmit={Auth}
         >
-          {isError && <p>{message}</p>}
+          {isError && <p className="text-center text-red-600">{message}</p>}
           <div>
             <label
               htmlFor="email"

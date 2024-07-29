@@ -36,6 +36,43 @@ export const getMe = createAsyncThunk("user/getMe", async(_, thunkAPI) => {
     }
 })
 
+export const forgetPassword = createAsyncThunk("user/forgetPassword", async(email, thunkAPI) => {
+    try {
+      const response = await axios.post('http://localhost:5000/lupapassword', {
+        email: email
+      })
+      return response.data;
+    } catch (error) {
+      if(error.response){
+        const message = error.response.data.msg
+        return thunkAPI.rejectWithValue(message);
+      }
+    }
+})
+
+export const resetPassword = createAsyncThunk("user/resetPassword", async({ newPassword, token }, thunkAPI) => {
+    if (!token) {
+        return thunkAPI.rejectWithValue("Token is required");
+      }
+      try {
+        const response = await axios.post(`http://localhost:5000/reset-password/${token}`, {
+          password: newPassword
+        });
+        if (response.status === 200) {
+          return response.data;
+        } else {
+          return thunkAPI.rejectWithValue(`Error resetting password: ${response.statusText}`);
+        }
+      } catch (error) {
+        if (error.response) {
+          const message = error.response.data.msg;
+          return thunkAPI.rejectWithValue(message);
+        } else {
+          return thunkAPI.rejectWithValue("Error resetting password");
+        }
+      }
+})
+
 export const LogOut = createAsyncThunk("user/LogOut", async() => {
    await axios.delete('http://localhost:5000/logout')
 })
@@ -89,6 +126,37 @@ export const authSlice = createSlice({
             state.isLoading = false;
             state.isError = true;
             state.message = action.payload
+        })
+
+        // Forget Password
+        builder.addCase(forgetPassword.pending, (state) => {
+        state.isLoading = true;
+        });
+        builder.addCase(forgetPassword.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.isSuccess = true;
+            state.message = action.payload;
+        });
+        builder.addCase(forgetPassword.rejected, (state, action) => {
+            state.isLoading = false;
+            state.isError = true;
+            state.message = action.payload;
+        })
+    
+        // Reset Password
+        builder.addCase(resetPassword.pending, (state) => {
+            state.isLoading = true;
+        });
+        builder.addCase(resetPassword.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.isSuccess = true;
+            state.user = { ...state.user, password: action.payload };
+            state.message = action.payload;
+        });
+        builder.addCase(resetPassword.rejected, (state, action) => {
+            state.isLoading = false;
+            state.isError = true;
+            state.message = action.payload;
         })
     }
 })

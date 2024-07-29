@@ -38,7 +38,7 @@ const RegisterForm = () => {
           className="space-y-4"
           onSubmit={saveUser}
         >
-          <p className="text-center">{msg}</p>
+          <p className="text-center text-red-600">{msg}</p>
           <div>
             <label
               htmlFor="nama"
