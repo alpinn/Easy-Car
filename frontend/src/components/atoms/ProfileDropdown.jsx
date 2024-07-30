@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 import { Button } from "../ui/button.jsx";
 import {
@@ -14,10 +14,14 @@ import {
 } from "../ui/dropdown-menu";
 
 import { FaUser, FaUserCircle } from "react-icons/fa";
+import { FaKey } from "react-icons/fa6";
 import { PiCarProfileFill } from "react-icons/pi";
 import { MdLogout } from "react-icons/md";
 
 import { LogOut, reset } from "../../features/auth-slice.js";
+
+import UpdateProfile from "../../pages/UpdateProfile.jsx";
+import ChangePassword from "../../pages/ChangePassword.jsx";
 
 const ProfileDropdown = () => {
   const dispatch = useDispatch();
@@ -53,11 +57,19 @@ const ProfileDropdown = () => {
             <DropdownMenuGroup>
               <DropdownMenuItem>
                 <FaUser className="mr-2 h-4 w-4" />
-                <span>Profile</span>
+                <Link to="/update-profile/:id">
+                  <span>Update Profile</span>
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <FaKey className="mr-2 h-4 w-4" />
+                <Link to="/change-password/:id">
+                  <span>Ubah Password</span>
+                </Link>
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <PiCarProfileFill className="mr-2 h-4 w-4" />
-                <span>My Booking</span>
+                <span>Riwayat Booking</span>
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />

@@ -7,7 +7,7 @@ import { IoMdMail } from "react-icons/io";
 
 const Footer = () => {
   return (
-    <footer className="bg-white dark:bg-gray-900">
+    <footer className="bg-gray-900">
       <div className="mx-auto w-full max-w-screen-xl px-[5.5rem] py-6 lg:py-8">
         <div className="md:flex md:justify-between">
           <div className="mb-6 md:mb-0">
@@ -44,7 +44,7 @@ const Footer = () => {
 
           <div className="grid grid-cols-2 gap-8 sm:gap-20">
             <div>
-              <h2 className="mb-6 text-lg font-semibold text-gray-900 uppercase dark:text-white">
+              <h2 className="mb-6 text-lg font-semibold text-white uppercase dark:text-white">
                 Menu Utama
               </h2>
               <ul className="text-gray-500 dark:text-gray-400 font-medium">
@@ -75,7 +75,7 @@ const Footer = () => {
               </ul>
             </div>
             <div>
-              <h2 className="mb-6 text-lg font-semibold text-gray-900 uppercase dark:text-white">
+              <h2 className="mb-6 text-lg font-semibold text-white uppercase dark:text-white">
                 Sosial Media
               </h2>
               <ul className="text-gray-500 dark:text-gray-400 font-medium">
@@ -109,7 +109,7 @@ const Footer = () => {
         </div>
         <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
         <div className="text-center">
-          <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
+          <span className="text-sm text-white sm:text-center dark:text-gray-400">
             © 2024{" "}
             <a
               href="https://flowbite.com/"

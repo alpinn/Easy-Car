@@ -10,6 +10,8 @@ import ResetPasswordForm from "./components/forms/ResetPasswordForm";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Booking from "./pages/Booking";
+import UpdateProfile from "./pages/UpdateProfile";
+import ChangePassword from "./pages/ChangePassword";
 
 function App() {
   return (
@@ -47,6 +49,14 @@ function App() {
           <Route
             path="/book-car"
             element={<Booking />}
+          />
+          <Route
+            path="/update-profile/:id"
+            element={<UpdateProfile />}
+          />
+          <Route
+            path="/change-password/:id"
+            element={<ChangePassword />}
           />
         </Routes>
       </BrowserRouter>
