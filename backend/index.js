@@ -10,6 +10,7 @@ import AuthRoute from "./routes/auth-route.js"
 import CarRoute from "./routes/car-route.js"
 import ContactRoute from "./routes/contactUs-route.js"
 import TestimonialRoute from "./routes/testimonial-route.js"
+import PesananRoute from "./routes/pesanan-route.js"
 
 dotenv.config()
 
@@ -52,6 +53,7 @@ app.use(AuthRoute)
 app.use(CarRoute)
 app.use(ContactRoute)
 app.use(TestimonialRoute)
+app.use(PesananRoute)
 
 app.listen(process.env.APP_PORT, () => {
     console.log("Server is running");

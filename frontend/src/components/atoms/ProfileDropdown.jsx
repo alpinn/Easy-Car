@@ -56,12 +56,6 @@ const ProfileDropdown = () => {
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuItem>
-                <FaUser className="mr-2 h-4 w-4" />
-                <Link to="/update-profile/:id">
-                  <span>Update Profile</span>
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
                 <FaKey className="mr-2 h-4 w-4" />
                 <Link to="/change-password/:id">
                   <span>Ubah Password</span>

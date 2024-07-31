@@ -23,6 +23,7 @@ export const Login = async (req, res) => {
         if (!isValid) return res.status(400).json({ msg: "Email or password is incorrect" });
     
         req.session.userId = user._id;
+        req.session.role = user.role;
     
         res.status(200).json({
             _id: user._id,
