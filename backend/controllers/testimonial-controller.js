@@ -18,7 +18,7 @@ export const createTestimonial = async(req, res) => {
             user_id: req.userId
         });
         await newTestimonial.save();
-        res.status(201).json({msg: "Testimonial Created Successfuly"})
+        res.status(201).json({msg: "Pembuatan Testimonial Berhasil"})
     } catch (error) {
         res.status(500).json({msg: error.message})
     }

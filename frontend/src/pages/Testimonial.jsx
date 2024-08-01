@@ -1,17 +1,17 @@
 import React from "react";
 import Layout from "./Layout";
-import UpdateProfileForm from "../components/forms/UpdateProfileForm";
+import TestimonialForm from "../components/forms/TestimonialForm";
 
-const UpdateProfile = () => {
+const Testimonial = () => {
   return (
     <div>
       <Layout>
         <div className="min-h-screen pt-20">
-          <UpdateProfileForm />
+          <TestimonialForm />
         </div>
       </Layout>
     </div>
   );
 };
 
-export default UpdateProfile;
+export default Testimonial;

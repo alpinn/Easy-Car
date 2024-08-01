@@ -17,16 +17,21 @@ export const LoginUser = createAsyncThunk("user/LoginUser", async(user, thunkAPI
         })
         return response.data;
     } catch (error) {
-        if(error.response){
-            const message = error.response.data.msg
-            return thunkAPI.rejectWithValue(message);
+        if (error.response) {
+          const message = error.response.data.msg;
+          console.error(`Login error: ${message}`);
+          return thunkAPI.rejectWithValue(message);
+        } else {
+          console.error(`Login error: ${error.message}`);
+          return thunkAPI.rejectWithValue("Unknown error");
         }
-    }
+      }
 })
 
 export const getMe = createAsyncThunk("user/getMe", async(_, thunkAPI) => {
     try {
         const response = await axios.get('http://localhost:5000/me')
+        // console.log(response.data)
         return response.data;
     } catch (error) {
         if(error.response){

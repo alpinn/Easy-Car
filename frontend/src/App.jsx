@@ -10,7 +10,7 @@ import ResetPasswordForm from "./components/forms/ResetPasswordForm";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Booking from "./pages/Booking";
-import UpdateProfile from "./pages/UpdateProfile";
+import Testimonial from "./pages/Testimonial";
 import ChangePassword from "./pages/ChangePassword";
 
 function App() {
@@ -51,8 +51,8 @@ function App() {
             element={<Booking />}
           />
           <Route
-            path="/update-profile/:id"
-            element={<UpdateProfile />}
+            path="/testimonial"
+            element={<Testimonial />}
           />
           <Route
             path="/change-password/:id"

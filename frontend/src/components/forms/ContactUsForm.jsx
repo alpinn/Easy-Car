@@ -1,17 +1,39 @@
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
+import axios from "axios";
 
 import ContactImage from "../../assets/contact.png";
 
 const ContactUsForm = () => {
-  const [successMessage, setSuccessMessage] = useState(null);
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [pesan, setPesan] = useState("");
+  const [contacts, setContacts] = useState([]);
 
-  const onSubmit = (data) => console.log(data);
+  const getContacts = async () => {
+    try {
+      const response = await axios.get("http://localhost:5000/contact-us");
+      setContacts(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.post("http://localhost:5000/contact-us", {
+        name,
+        email,
+        pesan,
+      });
+      setName("");
+      setEmail("");
+      setPesan("");
+      getContacts();
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div className="container mx-auto px-14 pt-32 py-20 md:px-15 lg:px-20 min-h-screen">
@@ -21,16 +43,9 @@ const ContactUsForm = () => {
           <p className="mb-6 text-base">
             Ada pertanyaan? Beri tahu kami atau melalui whatsapp kami!
           </p>
-          {successMessage && (
-            <div
-              className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4"
-              role="alert"
-            >
-              <p className="font-bold">{successMessage}</p>
-            </div>
-          )}
+
           <form
-            onSubmit={handleSubmit(onSubmit)}
+            onSubmit={handleSubmit}
             className="flex flex-col gap-4"
           >
             <div>
@@ -43,14 +58,10 @@ const ContactUsForm = () => {
               <input
                 type="text"
                 id="name"
-                {...register("name", { required: "Nama Lengkap is required" })}
+                value={name}
+                onChange={(e) => setName(e.target.value)}
                 className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               />
-              {errors.name && (
-                <span className="text-red-500 text-xs">
-                  {errors.name.message}
-                </span>
-              )}
             </div>
             <div>
               <label
@@ -62,39 +73,25 @@ const ContactUsForm = () => {
               <input
                 type="email"
                 id="email"
-                {...register("email", {
-                  required: "Email is required",
-                  pattern: {
-                    value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                    message: "Invalid email address",
-                  },
-                })}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               />
-              {errors.email && (
-                <span className="text-red-500 text-xs">
-                  {errors.email.message}
-                </span>
-              )}
             </div>
             <div>
               <label
-                htmlFor="message"
+                htmlFor="pesan"
                 className="block mb-2 text-sm font-medium text-gray-900"
               >
                 Pesan
               </label>
               <textarea
-                id="message"
+                id="pesan"
                 rows="4"
-                {...register("message", { required: "Pesan is required" })}
+                value={pesan}
+                onChange={(e) => setPesan(e.target.value)}
                 className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               />
-              {errors.message && (
-                <span className="text-red-500 text-xs">
-                  {errors.message.message}
-                </span>
-              )}
             </div>
             <button
               type="submit"

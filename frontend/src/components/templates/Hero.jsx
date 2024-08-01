@@ -1,5 +1,7 @@
 import React from "react";
-import SearchForm from "../forms/SearchForm";
+// import SearchForm from "../forms/SearchForm";
+import { Link } from "react-router-dom";
+import { Button } from "../ui/button.jsx";
 
 import carImage from "../../assets/car.png";
 
@@ -16,12 +18,17 @@ const Hero = () => {
             <p className="text-gray-600 mb-4 md:text-lg lg:text-xl">
               Dapatkan mobil dimanapun dan kapanpun Anda membutuhkannya.
             </p>
+            <Link to="/book-car">
+              <Button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-4">
+                <p>Mulai Rental</p>
+              </Button>
+            </Link>
           </div>
           <div className="md:w-100% lg:w-1/2">
             <img
               src={carImage}
               alt="Car"
-              className="lg:w-100% xl:w-[46rem] hidden md:block lg:flex xl:absolute right-0 top-0 mt-0 xl:mt-[7rem]"
+              className="lg:w-100% xl:w-[46rem] md:block lg:flex xl:absolute right-0 top-0 mt-0 xl:mt-[7rem]"
             />
           </div>
         </div>

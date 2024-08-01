@@ -1,10 +1,42 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Slider from "react-slick";
 import TestimonialCard from "../card/TestimonialCard";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import axios from "axios";
 
 const Testimonial = () => {
+  const [testimonials, setTestimonials] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchTestimonials = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get("/testimonial");
+        if (Array.isArray(response.data)) {
+          setTestimonials(response.data);
+        } else {
+          console.error("Response data is not an array:", response.data);
+        }
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchTestimonials();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
   function SampleNextArrow(props) {
     const { className, style, onClick } = props;
     return (
@@ -96,30 +128,6 @@ const Testimonial = () => {
     ],
   };
 
-  const testimonials = [
-    {
-      id: 1,
-      name: "John Doe",
-      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet nulla auctor, vestibulum magna sed, convallis ex.",
-      image:
-        "https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?cs=srgb&dl=pexels-justin-shaifer-501272-1222271.jpg&fm=jpg",
-    },
-    {
-      id: 2,
-      name: "Jane Doe",
-      text: "Cras justo odio, dapibus ac facilisis in, egestas eget quam. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
-      image:
-        "https://img.freepik.com/free-photo/curly-man-with-broad-smile-shows-perfect-teeth-being-amused-by-interesting-talk-has-bushy-curly-dark-hair-stands-indoor-against-white-blank-wall_273609-17092.jpg",
-    },
-    {
-      id: 3,
-      name: "Bob Smith",
-      text: "Donec id elit non mi porta gravida at eget metus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
-      image:
-        "https://techcrunch.com/wp-content/uploads/2016/09/2016_01_23_weebly_45251web.jpg",
-    },
-  ];
-
   return (
     <div className="bg-[#f5f7fc]">
       <div className=" container mx-auto mt-10 mb-32 px-10 md:px-20 lg:px-28 py-24">
@@ -129,16 +137,20 @@ const Testimonial = () => {
           </h2>
           <p className="text-3xl font-bold mb-8">What people say about us?</p>
         </div>
-        <Slider {...settings}>
-          {testimonials.map((item) => (
-            <TestimonialCard
-              key={item.id}
-              name={item.name}
-              text={item.text}
-              image={item.image}
-            />
-          ))}
-        </Slider>
+        {error ? (
+          <p style={{ color: "red" }}>{error}</p>
+        ) : (
+          <Slider {...settings}>
+            {testimonials &&
+              testimonials.map((testimonial) => (
+                <TestimonialCard
+                  key={testimonial._id}
+                  name={testimonial.name}
+                  text={testimonial.opinion}
+                />
+              ))}
+          </Slider>
+        )}
       </div>
     </div>
   );

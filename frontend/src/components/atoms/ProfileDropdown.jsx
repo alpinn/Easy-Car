@@ -13,15 +13,12 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 
-import { FaUser, FaUserCircle } from "react-icons/fa";
-import { FaKey } from "react-icons/fa6";
+import { FaUserCircle } from "react-icons/fa";
+import { FaKey, FaPencil } from "react-icons/fa6";
 import { PiCarProfileFill } from "react-icons/pi";
 import { MdLogout } from "react-icons/md";
 
 import { LogOut, reset } from "../../features/auth-slice.js";
-
-import UpdateProfile from "../../pages/UpdateProfile.jsx";
-import ChangePassword from "../../pages/ChangePassword.jsx";
 
 const ProfileDropdown = () => {
   const dispatch = useDispatch();
@@ -59,6 +56,12 @@ const ProfileDropdown = () => {
                 <FaKey className="mr-2 h-4 w-4" />
                 <Link to="/change-password/:id">
                   <span>Ubah Password</span>
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <FaPencil className="mr-2 h-4 w-4" />
+                <Link to="/testimonial">
+                  <span>Tambah Testimonial</span>
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem>
