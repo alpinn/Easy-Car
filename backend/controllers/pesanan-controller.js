@@ -4,9 +4,6 @@ import Car from '../models/car-model.js';
 
 // Get all pesanan for admin
 export const getAllPesanan = async (req, res) => {
-    if (req.session.role !== 'admin') {
-        return res.status(403).json({ msg: "Forbidden: Only admins can access all pesanan" });
-    }
     try {
         const response = await Pesanan.find().populate('user_id').populate('car_id');
         res.status(200).json(response)
@@ -17,9 +14,6 @@ export const getAllPesanan = async (req, res) => {
 
 // Get pesanan for user
 export const getUserPesanan = async (req, res) => {
-    if (!req.session.userId) {
-        return res.status(401).json({ msg: "Unauthorized" });
-    }
     try {
         const userId = req.session.userId;
         const response = await Pesanan.find({ user_id: userId }).populate('car_id');
@@ -86,11 +80,6 @@ export const updatePesanan = async (req, res) => {
         return res.status(404).json({ msg: "Pesanan not found" });
       }
   
-      // Check if user is admin
-      if (req.session.role !== 'admin') {
-        return res.status(403).json({ msg: "Forbidden: Only admins can update pesanan" });
-      }
-  
       // Update pesanan
       const { order } = req.body;
       pesanan.order = order;
@@ -109,11 +98,6 @@ export const deletePesanan = async (req, res) => {
 
     if (!pesanan) {
       return res.status(404).json({ msg: "Pesanan not found" });
-    }
-
-    // Check if user is admin
-    if (req.session.role !== 'admin') {
-      return res.status(403).json({ msg: "Forbidden: Only admins can delete pesanan" });
     }
 
     // Delete pesanan

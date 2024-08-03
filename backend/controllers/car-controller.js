@@ -5,7 +5,7 @@ const upload = multerConfig.single('image');
 
 export const getCars = async(req, res) => {
     try {
-        const response = await Car.find({}).populate('user_id', ['name', 'email']).select(['image', 'name', 'seat', 'transmision', 'door', 'fuel', 'price']);
+        const response = await Car.find();
         res.status(200).json(response)
     } catch (error) {
         res.status(500).json({msg: error.message})
@@ -37,8 +37,7 @@ export const createCar = async(req, res) => {
                     transmision: transmision,
                     door: door,
                     fuel: fuel,
-                    price: price,
-                    user_id: req.userId
+                    price: price
                 });
                 await newCar.save();
                 res.status(201).json({ msg: "Car Created Successfuly" })

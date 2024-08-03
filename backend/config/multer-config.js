@@ -19,10 +19,22 @@ const upload = multer({ storage: storage });
 
 export const deleteImage = (filename) => {
   const imagePath = path.join(__dirname, '..', 'images', filename);
-  fs.unlink(imagePath, (err) => {
+
+  // Check if the file exists before attempting to delete it
+  fs.access(imagePath, fs.constants.F_OK, (err) => {
     if (err) {
-      console.error(err);
+      console.log(`File ${filename} does not exist`);
+      return;
     }
+
+    // Delete the file
+    fs.unlink(imagePath, (err) => {
+      if (err) {
+        console.error(err);
+      } else {
+        console.log(`File ${filename} deleted successfully`);
+      }
+    });
   });
 };
 

@@ -29,9 +29,6 @@ const carSchema = mongoose.Schema({
         type: Number,
         required: true, 
     },
-    user_id: {
-        type: mongoose.Schema.Types.ObjectId, ref: "Users"
-    }
 })
 
 export default mongoose.model('Cars', carSchema);

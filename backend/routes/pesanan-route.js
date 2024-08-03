@@ -1,17 +1,16 @@
 import express from "express"
 import { getAllPesanan, getUserPesanan, createPesanan, getPesananById, updatePesanan, deletePesanan} from "../controllers/pesanan-controller.js"
-import { verifyUser } from "../middlewares/middleware.js";
 
 const router = express.Router();
 
-router.get('/admin/pesanan', verifyUser, getAllPesanan)
-router.get('/user/pesanan', verifyUser, getUserPesanan)
-router.get('/pesanan/:id', verifyUser, getPesananById)
+router.get('/admin/pesanan', getAllPesanan)
+router.get('/user/pesanan', getUserPesanan)
+router.get('/pesanan/:id', getPesananById)
 
-router.post('/pesanan', verifyUser, createPesanan)
+router.post('/pesan_mobil', createPesanan)
 
-router.put('/pesanan/:id', verifyUser, updatePesanan)
+router.put('/admin/pesanan/:id', updatePesanan)
 
-router.delete('/admin/pesanan/:id', verifyUser, deletePesanan)
+router.delete('/admin/pesanan/:id', deletePesanan)
 
 export default router;

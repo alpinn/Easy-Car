@@ -7,18 +7,16 @@ import {
     deleteCar
 } from "../controllers/car-controller.js"
 
-import { verifyUser } from "../middlewares/middleware.js";
-
 const router = express.Router();
 
 router.get('/cars', getCars)
-router.get('/cars/:id',verifyUser, getCarById)
+router.get('/cars/:id', getCarById)
 
-router.post('/cars',verifyUser, createCar)
+router.post('/cars', createCar)
 
-router.patch('/cars/:id',verifyUser, updateCar)
+router.patch('/cars/:id', updateCar)
 
-router.delete('/cars/:id',verifyUser, deleteCar)
+router.delete('/cars/:id', deleteCar)
 
 
 export default router;
