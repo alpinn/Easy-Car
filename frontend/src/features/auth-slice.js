@@ -6,7 +6,8 @@ const initialState = {
     isError: false,
     isSuccess: false,
     isLoading: false,
-    message: ""
+    message: "",
+    role: null
 }
 
 export const LoginUser = createAsyncThunk("user/LoginUser", async(user, thunkAPI) => {
@@ -111,6 +112,12 @@ export const authSlice = createSlice({
             state.isLoading = false;
             state.isSuccess = true;
             state.user = action.payload;
+            
+            if (action.payload.role === 'admin') {
+              state.role = 'admin';
+            } else {
+              state.role = 'user';
+            }
         });
         builder.addCase(getMe.rejected, (state, action) => {
             state.isLoading = false;

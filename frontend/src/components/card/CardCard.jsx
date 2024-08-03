@@ -1,14 +1,28 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { FaUser } from "react-icons/fa";
 import { GiGearStickPattern, GiCarDoor } from "react-icons/gi";
 import { BsFuelPumpFill } from "react-icons/bs";
+import axios from "axios";
 
-const CarCard = ({ car, price, rentNow }) => {
+const CarCard = ({ car, price }) => {
+  // const [cars, setCars] = useState([]);
+
+  // useEffect(() => {
+  //   axios
+  //     .get("http://localhost:5000/cars")
+  //     .then((response) => {
+  //       console.log(response.data);
+  //       setCars(response.data);
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //     });
+  // }, []);
   return (
     <div className="rounded-lg shadow-md border border-gray-200 overflow-hidden">
       <img
-        src={car.image}
+        src={`/images/${car.image}`}
         alt={car.name}
         className="w-full h-48 object-cover p-4 rounded-lg"
       />
@@ -24,7 +38,7 @@ const CarCard = ({ car, price, rentNow }) => {
             </li>
             <li className="flex items-center">
               <GiGearStickPattern className="mr-2" />
-              <p>{car.type}</p>
+              <p>{car.transmision}</p>
             </li>
           </div>
           <div>
@@ -41,14 +55,28 @@ const CarCard = ({ car, price, rentNow }) => {
         <div className="border-b"></div>
         <div className="mt-4 px-4 pb-4 flex justify-between items-center">
           <span className="text-md font-semibold text-gray-800">
-            {price}/hari
+            Rp. {price}/hari
           </span>
           <button className="text-blue-500 font-bold py-2 px-4 rounded-md">
-            Rental →
+            Rental
           </button>
         </div>
       </div>
     </div>
+    // <div>
+    //   <h1>Cars</h1>
+    //   <ul>
+    //     {cars.map((car) => (
+    //       <li key={car._id}>
+    //         <h2>{car.name}</h2>
+    //         <p>Seats: {car.seat}</p>
+    //         <p>Type: {car.transmion}</p>
+    //         <p>Doors: {car.door}</p>
+    //         <p>Fuel: {car.fuel}</p>
+    //       </li>
+    //     ))}
+    //   </ul>
+    // </div>
   );
 };
 

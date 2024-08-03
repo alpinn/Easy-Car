@@ -13,6 +13,9 @@ import Booking from "./pages/Booking";
 import Testimonial from "./pages/Testimonial";
 import ChangePassword from "./pages/ChangePassword";
 
+import ManajemenDashboard from "./pages/ManajemenDashboard";
+import AdminLogin from "./components/forms/AdminLoginForm";
+
 function App() {
   return (
     <div>
@@ -57,6 +60,14 @@ function App() {
           <Route
             path="/change-password/:id"
             element={<ChangePassword />}
+          />
+          <Route
+            path="/admin-login"
+            element={<AdminLogin />}
+          />
+          <Route
+            path="/admin-manajemen-dashboard"
+            element={<ManajemenDashboard />}
           />
         </Routes>
       </BrowserRouter>

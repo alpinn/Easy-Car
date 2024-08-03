@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import CarCard from "../card/CardCard";
 
 const BookCar = () => {
@@ -10,114 +11,58 @@ const BookCar = () => {
     petrol: false,
   });
 
-  const cars = [
-    {
-      id: "1",
-      name: "Red Mazda 6 - Elite Estate",
-      image:
-        "https://imgcdn.oto.com/large/gallery/exterior/23/2750/mazda-6-estate-front-angle-low-view-441846.jpg",
-      seat: "2",
-      type: "Manual",
-      door: "4",
-      price: "Rp. 1.800",
-      fuel: "Diesel",
-    },
-    {
-      id: "2",
-      name: "Blue Mazda 5 - Elite Estate",
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTisoPRnKgLAuc49cCls8tG7mgJg02JAc3nvA&s",
-      seat: "2",
-      type: "Automatic",
-      door: "4",
-      price: "Rp. 1.000",
-      fuel: "Diesel",
-    },
-    {
-      id: "3",
-      name: "Jaguar K5 the 2022 F-Type",
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9QVJB7Vj0wExcZaapShf1H6xhU8B0J-qq2g&s",
-      seat: "2",
-      type: "Manual",
-      door: "4",
-      price: "Rp. 1.120",
-      fuel: "Diesel",
-    },
-    {
-      id: "4",
-      name: "Infiniti Q60 Luxury Car F-Type",
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZoZHBvthVJEPZ5vfvRzlTQttRV8_DRYow2Q&s",
-      seat: "2",
-      type: "Manual",
-      door: "4",
-      price: "Rp. 1.100",
-      fuel: "Diesel",
-    },
-    {
-      id: "5",
-      name: "Red Mazda 6 - Elite Estate",
-      image:
-        "https://imgcdn.oto.com/large/gallery/exterior/23/2750/mazda-6-estate-front-angle-low-view-441846.jpg",
-      seat: "2",
-      type: "Automatic",
-      door: "4",
-      price: "Rp. 1.800",
-      fuel: "Diesel",
-    },
-    {
-      id: "6",
-      name: "Blue Mazda 5 - Elite Estate",
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTisoPRnKgLAuc49cCls8tG7mgJg02JAc3nvA&s",
-      seat: "2",
-      type: "Manual",
-      door: "4",
-      price: "Rp. 1.000",
-      fuel: "Gasoline",
-    },
-    //...
-  ];
+  const [cars, setCars] = useState([]);
 
-  const filteredCars = cars.filter((car) => {
-    if (
-      searchTerm &&
-      !car.name.toLowerCase().includes(searchTerm.toLowerCase())
-    ) {
-      return false;
-    }
-    if (checked.automatic && car.type !== "Automatic") {
-      return false;
-    }
-    if (checked.manual && car.type !== "Manual") {
-      return false;
-    }
-    if (checked.diesel && car.fuel !== "Diesel") {
-      return false;
-    }
-    if (checked.gasoline && car.fuel !== "Gasoline") {
-      return false;
-    }
-    if (checked.two && car.seat !== "2") {
-      return false;
-    }
-    if (checked.four && car.seat !== "4") {
-      return false;
-    }
-    return true;
-  });
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/cars")
+      .then((response) => {
+        console.log(response.data);
+        setCars(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
-  const handleSearch = (e) => {
-    setSearchTerm(e.target.value);
-  };
+  // const filteredCars = cars.filter((car) => {
+  //   if (
+  //     searchTerm &&
+  //     !car.name.toLowerCase().includes(searchTerm.toLowerCase())
+  //   ) {
+  //     return false;
+  //   }
+  //   if (checked.automatic && car.type !== "Automatic") {
+  //     return false;
+  //   }
+  //   if (checked.manual && car.type !== "Manual") {
+  //     return false;
+  //   }
+  //   if (checked.diesel && car.fuel !== "Diesel") {
+  //     return false;
+  //   }
+  //   if (checked.gasoline && car.fuel !== "Gasoline") {
+  //     return false;
+  //   }
+  //   if (checked.two && car.seat !== "2") {
+  //     return false;
+  //   }
+  //   if (checked.four && car.seat !== "4") {
+  //     return false;
+  //   }
+  //   return true;
+  // });
 
-  const handleCheckboxChange = (e) => {
-    setChecked((prevChecked) => ({
-      ...prevChecked,
-      [e.target.value]: e.target.checked,
-    }));
-  };
+  // const handleSearch = (e) => {
+  //   setSearchTerm(e.target.value);
+  // };
+
+  // const handleCheckboxChange = (e) => {
+  //   setChecked((prevChecked) => ({
+  //     ...prevChecked,
+  //     [e.target.value]: e.target.checked,
+  //   }));
+  // };
   return (
     <div className="container mx-auto px-14 py-16 md:px-16 lg:px-20">
       {/* <div className="sticky top-0 h-screen w-64 bg-gray-100 p-4">
@@ -143,7 +88,7 @@ const BookCar = () => {
           </li>
         </ul>
       </div> */}
-      <div className="flex-1">
+      {/* <div className="flex-1">
         <input
           type="search"
           value={searchTerm}
@@ -222,11 +167,11 @@ const BookCar = () => {
             </ul>
           </div>
         </div>
-      </div>
+      </div> */}
       <ul className="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {filteredCars.map((car) => (
+        {cars.map((car) => (
           <CarCard
-            key={car.id}
+            key={car._id}
             car={car}
             price={car.price}
           />

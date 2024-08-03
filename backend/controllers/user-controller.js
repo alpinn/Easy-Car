@@ -34,7 +34,7 @@ export const createUser = async (req, res) => {
     const hashPassword = await argon2.hash(password);
     const userRole = role ? role : 'user';
     const token = jwt.sign({_id: User._id}, process.env.JWT_KEY, {
-        expiresIn: '90d',
+        expiresIn: '3m',
     })
     
     try {

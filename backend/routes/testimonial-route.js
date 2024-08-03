@@ -10,7 +10,7 @@ import { verifyUser } from "../middlewares/middleware.js";
 
 const router = express.Router();
 
-router.get('/testimonial', verifyUser, getTestimonials)
+router.get('/testimonial', getTestimonials)
 
 router.post('/testimonial', verifyUser, createTestimonial)
 

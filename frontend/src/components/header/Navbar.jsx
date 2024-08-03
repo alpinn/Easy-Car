@@ -63,13 +63,13 @@ const Navbar = () => {
         </Link>
         <div>
           {isLoggedIn ? (
-            <div className="hidden md:flex w-full">
+            <div className="hidden lg:flex w-full">
               <ProfileDropdown />
             </div>
           ) : (
             <Link
               to="/login"
-              className="hidden md:flex"
+              className="hidden lg:flex"
             >
               <Button className="rounded text-white bg-blue-600 hover:bg-blue-500">
                 Login

@@ -47,7 +47,7 @@ export const getPesananById = async(req, res) => {
 export const createPesanan = async (req, res) => {
     try {
       const userId = req.session.userId;
-      const { phoneNumber, pickUpDate, pickUpTime, dropOffDate, dropOffTime, order, car_id } = req.body;
+      const { phoneNumber, pickUpDate, pickUpTime, dropOffDate, dropOffTime, car_id } = req.body;
   
       // Check if user_id exists
       const user = await User.findById(userId);
@@ -67,7 +67,6 @@ export const createPesanan = async (req, res) => {
         pickUpTime,
         dropOffDate,
         dropOffTime,
-        order,
         user_id: userId,
         car_id,
       });
@@ -101,4 +100,26 @@ export const updatePesanan = async (req, res) => {
     } catch (error) {
       res.status(500).json({ msg: error.message });
     }
+};
+
+export const deletePesanan = async (req, res) => {
+  try {
+    const pesananId = req.params.id;
+    const pesanan = await Pesanan.findById(pesananId);
+
+    if (!pesanan) {
+      return res.status(404).json({ msg: "Pesanan not found" });
+    }
+
+    // Check if user is admin
+    if (req.session.role !== 'admin') {
+      return res.status(403).json({ msg: "Forbidden: Only admins can delete pesanan" });
+    }
+
+    // Delete pesanan
+    await Pesanan.findByIdAndDelete(pesananId);
+    res.status(200).json({ msg: "Pesanan deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ msg: error.message });
+  }
 };
