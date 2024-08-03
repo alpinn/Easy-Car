@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { LoginUser, reset } from "../../features/auth-slice.js";
+import { LoginAdmin, reset } from "../../features/auth-slice.js";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
@@ -9,20 +9,22 @@ const LoginForm = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { user, isError, isSuccess, isLoading, message } = useSelector(
+  const { admin, isError, isSuccess, isLoading, message } = useSelector(
     (state) => state.auth
   );
 
   useEffect(() => {
-    if (user || isSuccess) {
+    if (admin || isSuccess) {
       // Check the admin type and navigate to the corresponding dashboard
-      if (user.role === "admin" && user.type === "update") {
+      if (admin.role === "Update") {
         navigate("/admin-update-dashboard");
-      } else if (user.role === "admin" && user.type === "manajemen") {
+        dispatch(reset());
+      } else if (admin.role === "Admin" && admin.type === "Manajemen") {
         navigate("/admin-manajemen-dashboard");
+        dispatch(reset());
       }
     }
-  }, [user, isSuccess, navigate]);
+  }, [admin, isSuccess, navigate, dispatch]);
 
   useEffect(() => {
     return () => {
@@ -32,7 +34,7 @@ const LoginForm = () => {
 
   const Auth = (e) => {
     e.preventDefault();
-    dispatch(LoginUser({ email, password }));
+    dispatch(LoginAdmin({ email, password }));
   };
 
   return (

@@ -6,7 +6,7 @@ const router = express.Router();
 router.get('/users', getUsers)
 router.get('/users/:id', getUsersById)
 
-router.post('/users', createUser)
+router.post('/register', createUser)
 
 router.patch('/users/:id', updateUser)
 

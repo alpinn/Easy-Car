@@ -6,6 +6,7 @@ import MongoStore from "connect-mongo"
 import connectToMongoDB from "./config/database.js"
 
 import UserRoute from "./routes/user-route.js"
+import AdminRoute from "./routes/admin-route.js"
 import AuthRoute from "./routes/auth-route.js"
 import CarRoute from "./routes/car-route.js"
 import ContactRoute from "./routes/contactUs-route.js"
@@ -54,6 +55,7 @@ app.use(CarRoute)
 app.use(ContactRoute)
 app.use(TestimonialRoute)
 app.use(PesananRoute)
+app.use(AdminRoute)
 
 app.listen(process.env.APP_PORT, () => {
     console.log("Server is running");

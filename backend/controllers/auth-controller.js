@@ -1,4 +1,5 @@
 import User from "../models/user-model.js";
+import Admin from "../models/admin-model.js";
 import argon2  from "argon2";
 import jwt from "jsonwebtoken"
 import dotenv from "dotenv"
@@ -37,6 +38,34 @@ export const Login = async (req, res) => {
         }
 };
 
+export const LoginAdmin = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        if (!email || !password) {
+            return res.status(400).json({ msg: "Email and password are required" });
+        }
+        const admin = await Admin.findOne({ email });
+    
+        if (!admin) return res.status(404).json({ msg: "Admin not found" });
+    
+        const isValid = await argon2.verify(admin.password, password);
+        if (!isValid) return res.status(400).json({ msg: "Email or password is incorrect" });
+    
+        req.session.adminId = admin._id;
+    
+        res.status(200).json({
+            _id: admin._id,
+            name: admin.name,
+            email: admin.email,
+            role: admin.role,
+            type: admin.type
+        });
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ msg: "Internal Server Error" });
+        }
+};
+
 export const Me = async (req, res) => {
     try {
         if (!req.session.userId) {
@@ -53,7 +82,7 @@ export const Me = async (req, res) => {
 }
 
 export const Logout = (req, res) => {
-    if (!req.session.userId) {
+    if (!req.session.userId && !req.session.adminId) {
         return res.status(200).json({ msg: "Already logged out" });
     }
     req.session.destroy((err) => {

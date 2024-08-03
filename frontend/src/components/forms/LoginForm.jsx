@@ -16,14 +16,9 @@ const LoginForm = () => {
   useEffect(() => {
     if (user || isSuccess) {
       navigate("/");
-    }
-  }, [user, isSuccess, navigate]);
-
-  useEffect(() => {
-    return () => {
       dispatch(reset());
-    };
-  }, [dispatch]);
+    }
+  }, [user, isSuccess, navigate, dispatch]);
 
   const Auth = (e) => {
     e.preventDefault();
@@ -99,7 +94,7 @@ const LoginForm = () => {
                 to="/register"
                 className="text-blue-500 hover:underline"
               >
-                Sign Up
+                Register
               </Link>
             </p>
           </div>

@@ -32,7 +32,7 @@ export const createUser = async (req, res) => {
     if (existingUser) return res.status(400).json({ msg: "Email already exists" });
 
     const hashPassword = await argon2.hash(password);
-    const userRole = role ? role : 'user';
+    const userRole = role ? role : 'User';
     const token = jwt.sign({_id: User._id}, process.env.JWT_KEY, {
         expiresIn: '3m',
     })

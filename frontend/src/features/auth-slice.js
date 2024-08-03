@@ -3,14 +3,14 @@ import axios from "axios";
 
 const initialState = {
     user: null,
+    admin: null,
     isError: false,
     isSuccess: false,
     isLoading: false,
-    message: "",
-    role: null
+    message: ""
 }
 
-export const LoginUser = createAsyncThunk("user/LoginUser", async(user, thunkAPI) => {
+export const LoginUser = createAsyncThunk("LoginUser", async(user, thunkAPI) => {
     try {
         const response = await axios.post('http://localhost:5000/login', {
             email: user.email,
@@ -29,7 +29,26 @@ export const LoginUser = createAsyncThunk("user/LoginUser", async(user, thunkAPI
       }
 })
 
-export const getMe = createAsyncThunk("user/getMe", async(_, thunkAPI) => {
+export const LoginAdmin = createAsyncThunk("LoginAdmin", async(admin, thunkAPI) => {
+    try {
+        const response = await axios.post('http://localhost:5000/admin/login', {
+            email: admin.email,
+            password: admin.password
+        })
+        return response.data;
+    } catch (error) {
+        if (error.response) {
+          const message = error.response.data.msg;
+          console.error(`Login error: ${message}`);
+          return thunkAPI.rejectWithValue(message);
+        } else {
+          console.error(`Login error: ${error.message}`);
+          return thunkAPI.rejectWithValue("Unknown error");
+        }
+      }
+})
+
+export const getMe = createAsyncThunk("getMe", async(_, thunkAPI) => {
     try {
         const response = await axios.get('http://localhost:5000/me')
         // console.log(response.data)
@@ -42,7 +61,7 @@ export const getMe = createAsyncThunk("user/getMe", async(_, thunkAPI) => {
     }
 })
 
-export const forgetPassword = createAsyncThunk("user/forgetPassword", async(email, thunkAPI) => {
+export const forgetPassword = createAsyncThunk("forgetPassword", async(email, thunkAPI) => {
     try {
       const response = await axios.post('http://localhost:5000/lupapassword', {
         email: email
@@ -56,7 +75,7 @@ export const forgetPassword = createAsyncThunk("user/forgetPassword", async(emai
     }
 })
 
-export const resetPassword = createAsyncThunk("user/resetPassword", async({ newPassword, token }, thunkAPI) => {
+export const resetPassword = createAsyncThunk("resetPassword", async({ newPassword, token }, thunkAPI) => {
     if (!token) {
         return thunkAPI.rejectWithValue("Token is required");
       }
@@ -79,8 +98,21 @@ export const resetPassword = createAsyncThunk("user/resetPassword", async({ newP
       }
 })
 
-export const LogOut = createAsyncThunk("user/LogOut", async() => {
-   await axios.delete('http://localhost:5000/logout')
+export const LogOut = createAsyncThunk("LogOut", async(thunkAPI) => {
+  try{
+    const response = await axios.delete('http://localhost:5000/logout');
+    console.log(response.data);
+    // Clear both user and admin state
+    return response.data;
+  } catch (error) {
+    if (error.response) {
+      const message = error.response.data.msg;
+      return thunkAPI.rejectWithValue(message);
+    } else {
+      return thunkAPI.rejectWithValue("Error logging out");
+    }
+  }
+   
 })
 
 export const authSlice = createSlice({
@@ -104,6 +136,20 @@ export const authSlice = createSlice({
             state.message = action.payload
         })
 
+        builder.addCase(LoginAdmin.pending, (state) => {
+            state.isLoading = true;
+        });
+        builder.addCase(LoginAdmin.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.isSuccess = true;
+            state.admin = action.payload;
+        });
+        builder.addCase(LoginAdmin.rejected, (state, action) => {
+            state.isLoading = false;
+            state.isError = true;
+            state.message = action.payload
+        })
+
         //Get User Login
         builder.addCase(getMe.pending, (state) => {
             state.isLoading = true;
@@ -112,17 +158,10 @@ export const authSlice = createSlice({
             state.isLoading = false;
             state.isSuccess = true;
             state.user = action.payload;
-            
-            if (action.payload.role === 'admin') {
-              state.role = 'admin';
-            } else {
-              state.role = 'user';
-            }
         });
         builder.addCase(getMe.rejected, (state, action) => {
             state.isLoading = false;
             state.isError = true;
-            state.message = action.payload
         })
 
         //logout
@@ -133,11 +172,15 @@ export const authSlice = createSlice({
             state.isLoading = false;
             state.isSuccess = true;
             state.user = null;
+            state.admin = null;
+            state.message = action.payload;
         });
         builder.addCase(LogOut.rejected, (state, action) => {
             state.isLoading = false;
             state.isError = true;
             state.message = action.payload
+            state.user = null; // Reset user state
+            state.admin = null; // Reset admin state
         })
 
         // Forget Password
