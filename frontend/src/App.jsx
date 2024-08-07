@@ -14,7 +14,12 @@ import Testimonial from "./pages/Testimonial";
 import ChangePassword from "./pages/ChangePassword";
 
 import ManajemenDashboard from "./pages/ManajemenDashboard";
+import UpdateDashboard from "./pages/UpdateDashboard";
 import AdminLogin from "./components/forms/AdminLoginForm";
+import CarDashboard from "./pages/CarDashboard";
+import PesananDashboard from "./pages/PesananDashboard";
+import UserDashboard from "./pages/UserDashboard";
+import CarAddDashboard from "./pages/CarAddDashboard";
 
 function App() {
   return (
@@ -62,12 +67,32 @@ function App() {
             element={<ChangePassword />}
           />
           <Route
-            path="/admin-login"
+            path="/admin"
             element={<AdminLogin />}
           />
           <Route
             path="/admin-manajemen-dashboard"
             element={<ManajemenDashboard />}
+          />
+          <Route
+            path="/admin-update-dashboard"
+            element={<UpdateDashboard />}
+          />
+          <Route
+            path="/dashboard/car"
+            element={<CarDashboard />}
+          />
+          <Route
+            path="/dashboard/car/add"
+            element={<CarAddDashboard />}
+          />
+          <Route
+            path="/dashboard/pesanan"
+            element={<PesananDashboard />}
+          />
+          <Route
+            path="/dashboard/user"
+            element={<UserDashboard />}
           />
         </Routes>
       </BrowserRouter>

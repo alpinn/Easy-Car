@@ -6,19 +6,6 @@ import { BsFuelPumpFill } from "react-icons/bs";
 import axios from "axios";
 
 const CarCard = ({ car, price }) => {
-  // const [cars, setCars] = useState([]);
-
-  // useEffect(() => {
-  //   axios
-  //     .get("http://localhost:5000/cars")
-  //     .then((response) => {
-  //       console.log(response.data);
-  //       setCars(response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //     });
-  // }, []);
   return (
     <div className="rounded-lg shadow-md border border-gray-200 overflow-hidden">
       <img

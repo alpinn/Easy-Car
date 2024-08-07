@@ -24,12 +24,16 @@ const ProfileDropdown = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { user } = useSelector((state) => state.auth);
+  const { user, admin } = useSelector((state) => state.auth);
 
   const logout = () => {
     dispatch(LogOut());
     dispatch(reset());
-    navigate("/");
+    if (admin) {
+      navigate("/admin-login");
+    } else if (user) {
+      navigate("/");
+    }
   };
 
   if (user) {
@@ -69,6 +73,36 @@ const ProfileDropdown = () => {
                 <span>Riwayat Booking</span>
               </DropdownMenuItem>
             </DropdownMenuGroup>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem
+              onClick={logout}
+              className="cursor-pointer"
+            >
+              <MdLogout className="mr-2 h-4 w-4" />
+              <span>Log out</span>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
+    );
+  } else if (admin) {
+    return (
+      <div>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button
+              variant="outline"
+              className="w-full"
+            >
+              <FaUserCircle
+                className="text-blue-500"
+                size={20}
+              />
+              <DropdownMenuLabel>{admin.name}</DropdownMenuLabel>
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent className="w-56">
+            <DropdownMenuLabel>My Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem
               onClick={logout}

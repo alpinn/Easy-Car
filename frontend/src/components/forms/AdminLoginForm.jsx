@@ -16,10 +16,10 @@ const LoginForm = () => {
   useEffect(() => {
     if (admin || isSuccess) {
       // Check the admin type and navigate to the corresponding dashboard
-      if (admin.role === "Update") {
+      if (admin?.role === "Admin" && admin?.type === "Update") {
         navigate("/admin-update-dashboard");
         dispatch(reset());
-      } else if (admin.role === "Admin" && admin.type === "Manajemen") {
+      } else if (admin?.role === "Admin" && admin?.type === "Manajemen") {
         navigate("/admin-manajemen-dashboard");
         dispatch(reset());
       }

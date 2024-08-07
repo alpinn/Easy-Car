@@ -16,7 +16,7 @@ export const getCarById = async(req, res) => {
     try {
         const car = await Car.findOne({ _id: req.params.id });
         if(!car) return res.status(404).json({msg: "Car not found"})
-        const response = await Car.findOne({ _id: car._id, user_id: req.userId }).populate('user_id', ['name', 'email']).select(['image', 'name', 'seat', 'transmision', 'door', 'fuel', 'price']);
+        const response = await Car.findOne({ _id: car._id}).select(['image', 'name', 'seat', 'transmision', 'door', 'fuel', 'price']);
         res.status(200).json(response)
     } catch (error) {
         res.status(500).json({msg: error.message})

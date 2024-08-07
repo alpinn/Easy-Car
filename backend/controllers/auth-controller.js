@@ -81,6 +81,21 @@ export const Me = async (req, res) => {
     }
 }
 
+export const AdminMe = async (req, res) => {
+    try {
+        if (!req.session.adminId) {
+            return res.status(401).json({ msg: "Try to login" });
+        }
+        const admin = await Admin.findById(req.session.adminId);
+
+        if (!admin) return res.status(404).json({ msg: "Admin not found" });
+        res.status(200).json(admin);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ msg: "Internal Server Error" });
+    }
+}
+
 export const Logout = (req, res) => {
     if (!req.session.userId && !req.session.adminId) {
         return res.status(200).json({ msg: "Already logged out" });

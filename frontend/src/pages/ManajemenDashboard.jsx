@@ -1,10 +1,13 @@
 import React from "react";
-import AdminManajemenDashboard from "../components/templates/AdminManajemenDashboard";
+import Sidebar from "../components/templates/admin/manajemen/Sidebar";
+import AdminLayout from "./AdminLayout";
 
 const ManajemenDashboard = () => {
   return (
     <div>
-      <AdminManajemenDashboard />
+      <AdminLayout>
+        <Sidebar />
+      </AdminLayout>
     </div>
   );
 };

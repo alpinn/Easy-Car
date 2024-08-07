@@ -61,6 +61,19 @@ export const getMe = createAsyncThunk("getMe", async(_, thunkAPI) => {
     }
 })
 
+export const getMeAdmin = createAsyncThunk("getMeAdmin", async(_, thunkAPI) => {
+    try {
+        const response = await axios.get('http://localhost:5000/admin/me')
+        // console.log(response.data)
+        return response.data;
+    } catch (error) {
+        if(error.response){
+            const message = error.response.data.msg
+            return thunkAPI.rejectWithValue(message);
+        }
+    }
+})
+
 export const forgetPassword = createAsyncThunk("forgetPassword", async(email, thunkAPI) => {
     try {
       const response = await axios.post('http://localhost:5000/lupapassword', {
@@ -160,6 +173,20 @@ export const authSlice = createSlice({
             state.user = action.payload;
         });
         builder.addCase(getMe.rejected, (state, action) => {
+            state.isLoading = false;
+            state.isError = true;
+        })
+
+        //Get Admin Login
+        builder.addCase(getMeAdmin.pending, (state) => {
+            state.isLoading = true;
+        });
+        builder.addCase(getMeAdmin.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.isSuccess = true;
+            state.admin = action.payload;
+        });
+        builder.addCase(getMeAdmin.rejected, (state, action) => {
             state.isLoading = false;
             state.isError = true;
         })
