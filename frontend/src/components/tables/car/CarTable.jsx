@@ -1,9 +1,7 @@
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
-  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
@@ -43,8 +41,8 @@ const CarTable = () => {
           <TableHead>No</TableHead>
           <TableHead className="w-[100px] text-center">Gambar</TableHead>
           <TableHead className="w-[150px] text-center">Nama Mobil</TableHead>
-          <TableHead className="w-[100px] text-center">Jumlah Kursi</TableHead>
-          <TableHead className="w-[100px] text-center">
+          <TableHead className="w-[125px] text-center">Jumlah Kursi</TableHead>
+          <TableHead className="w-[140px] text-center">
             Jenis Transmisi
           </TableHead>
           <TableHead className="w-[100px] text-center">Jumlah Pintu</TableHead>
@@ -60,7 +58,11 @@ const CarTable = () => {
               {index + 1}
             </TableCell>
             <TableCell className="font-medium text-center">
-              {car.image}
+              <img
+                src={`/images/${car.image}`}
+                alt={car.name}
+                className="w-full h-24 object-cover p-4 rounded-lg"
+              />
             </TableCell>
             <TableCell className="font-medium text-center">
               {car.name}
@@ -83,7 +85,7 @@ const CarTable = () => {
             <TableCell className="font-medium text-center">
               <div className="flex flex-row gap-2">
                 <Link
-                  to=""
+                  to={`/dashboard/car/edit/${car._id}`}
                   className="bg-yellow-500 p-2 rounded"
                 >
                   <span>Edit</span>

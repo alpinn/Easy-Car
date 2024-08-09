@@ -12,6 +12,7 @@ const CardDeals = () => {
       .then((response) => {
         console.log(response.data);
         setCars(response.data);
+        setCars(response.data.slice(0, 4));
       })
       .catch((error) => {
         console.error(error);

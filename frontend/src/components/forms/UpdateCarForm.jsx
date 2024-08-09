@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate, useParams } from "react-router-dom";
 
-const AddCarForm = () => {
+const UpdateCarForm = () => {
+  const navigate = useNavigate();
   const [image, setImage] = useState("");
   const [name, setName] = useState("");
   const [seat, setSeat] = useState("");
@@ -11,35 +13,54 @@ const AddCarForm = () => {
   const [price, setPrice] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const { id } = useParams();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const formData = new FormData();
-    formData.append("image", image);
-    formData.append("name", name);
-    formData.append("seat", seat);
-    formData.append("transmision", transmision);
-    formData.append("door", door);
-    formData.append("fuel", fuel);
-    formData.append("price", price);
-
-    try {
-      const response = await axios.post(
-        "http://localhost:5000/cars",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
+  useEffect(() => {
+    const getCarById = async () => {
+      try {
+        const response = await axios.get(`http://localhost:5000/cars/${id}`);
+        setImage(response.data.image);
+        setName(response.data.name);
+        setSeat(response.data.seat);
+        setTransmision(response.data.transmision);
+        setDoor(response.data.door);
+        setFuel(response.data.fuel);
+        setPrice(response.data.price);
+        console.log(response.data);
+      } catch (error) {
+        if (error.response) {
+          setError(error.response.data.msg);
         }
+      }
+    };
+    getCarById();
+  }, [id]);
+
+  const handleUpdateCar = async (e) => {
+    e.preventDefault();
+    try {
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("seat", seat);
+      formData.append("transmision", transmision);
+      formData.append("door", door);
+      formData.append("fuel", fuel);
+      formData.append("price", price);
+      if (image) {
+        formData.append("image", image);
+      }
+      const response = await axios.patch(
+        `http://localhost:5000/cars/${id}`,
+        formData
       );
-      if (response.status === 201) {
-        setSuccess("Car created successfully!");
+      if (response.status === 200) {
+        setSuccess("Car updated successfully!");
+        navigate("/dashboard/car");
       } else {
-        setError("Failed to create car.");
+        setError("Failed to update car.");
       }
     } catch (error) {
-      setError("Failed to create car.");
+      setError("Failed to update car.");
     }
   };
 
@@ -47,7 +68,7 @@ const AddCarForm = () => {
     <div>
       <form
         className="flex flex-col gap-4 bg-white w-fit px-5 py-3 rounded-lg shadow-md"
-        onSubmit={handleSubmit}
+        onSubmit={handleUpdateCar}
       >
         {error && <p className="text-center text-red-600">{error}</p>}
         {success && <p className="text-center text-green-600">{success}</p>}
@@ -176,4 +197,4 @@ const AddCarForm = () => {
   );
 };
 
-export default AddCarForm;
+export default UpdateCarForm;

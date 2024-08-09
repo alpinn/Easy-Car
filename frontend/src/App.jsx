@@ -20,6 +20,7 @@ import CarDashboard from "./pages/CarDashboard";
 import PesananDashboard from "./pages/PesananDashboard";
 import UserDashboard from "./pages/UserDashboard";
 import CarAddDashboard from "./pages/CarAddDashboard";
+import CarUpdateDashboard from "./pages/CarUpdateDashboard";
 
 function App() {
   return (
@@ -85,6 +86,10 @@ function App() {
           <Route
             path="/dashboard/car/add"
             element={<CarAddDashboard />}
+          />
+          <Route
+            path="/dashboard/car/edit/:id"
+            element={<CarUpdateDashboard />}
           />
           <Route
             path="/dashboard/pesanan"

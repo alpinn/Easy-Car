@@ -50,20 +50,6 @@ const CarCard = ({ car, price }) => {
         </div>
       </div>
     </div>
-    // <div>
-    //   <h1>Cars</h1>
-    //   <ul>
-    //     {cars.map((car) => (
-    //       <li key={car._id}>
-    //         <h2>{car.name}</h2>
-    //         <p>Seats: {car.seat}</p>
-    //         <p>Type: {car.transmion}</p>
-    //         <p>Doors: {car.door}</p>
-    //         <p>Fuel: {car.fuel}</p>
-    //       </li>
-    //     ))}
-    //   </ul>
-    // </div>
   );
 };
 
