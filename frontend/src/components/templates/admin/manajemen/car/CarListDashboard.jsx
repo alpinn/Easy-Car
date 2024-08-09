@@ -1,5 +1,5 @@
 import React from "react";
-import CarTable from "../../../../tables/car/CarTable";
+import CarTable from "../../../../tables/CarTable";
 import ManajemenSidebar from "../../../../sidebars/ManajemenSidebar";
 import { Link } from "react-router-dom";
 

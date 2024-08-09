@@ -2,6 +2,7 @@ import React from "react";
 
 import { FaListUl } from "react-icons/fa6";
 import { FaUser, FaCarSide } from "react-icons/fa";
+import { MdQuestionAnswer } from "react-icons/md";
 import { Link } from "react-router-dom";
 
 const ManajemenSidebar = () => {
@@ -30,6 +31,12 @@ const ManajemenSidebar = () => {
           <div className="flex items-center gap-2 px-3 py-2 rounded-sm hover:bg-[#333a47] ease-out duration-300">
             <FaUser fontSize={24} />
             <span className="text-lg">User</span>
+          </div>
+        </Link>
+        <Link to="/dashboard/pertanyaan">
+          <div className="flex items-center gap-2 px-3 py-2 rounded-sm hover:bg-[#333a47] ease-out duration-300">
+            <MdQuestionAnswer fontSize={24} />
+            <span className="text-lg">Pertanyaan</span>
           </div>
         </Link>
       </div>

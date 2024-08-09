@@ -21,6 +21,7 @@ import PesananDashboard from "./pages/PesananDashboard";
 import UserDashboard from "./pages/UserDashboard";
 import CarAddDashboard from "./pages/CarAddDashboard";
 import CarUpdateDashboard from "./pages/CarUpdateDashboard";
+import ContactUsDashboard from "./pages/ContactUsDashboard";
 
 function App() {
   return (
@@ -98,6 +99,10 @@ function App() {
           <Route
             path="/dashboard/user"
             element={<UserDashboard />}
+          />
+          <Route
+            path="/dashboard/pertanyaan"
+            element={<ContactUsDashboard />}
           />
         </Routes>
       </BrowserRouter>

@@ -1,6 +1,6 @@
 import React from "react";
 import ManajemenSidebar from "../../../sidebars/ManajemenSidebar";
-import PesananTable from "../../../tables/pesanan/PesananTable";
+import PesananTable from "../../../tables/PesananTable";
 
 const PesananListDashboard = () => {
   return (
