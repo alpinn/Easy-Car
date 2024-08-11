@@ -1,9 +1,10 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { FaUser } from "react-icons/fa";
-import { GiGearStickPattern, GiCarDoor } from "react-icons/gi";
+import { GiCarDoor } from "react-icons/gi";
 import { BsFuelPumpFill } from "react-icons/bs";
-import axios from "axios";
+import { PiEngineFill } from "react-icons/pi";
+import { Link } from "react-router-dom";
 
 const CarCard = ({ car, price }) => {
   return (
@@ -24,7 +25,7 @@ const CarCard = ({ car, price }) => {
               <p>{car.seat}</p>
             </li>
             <li className="flex items-center">
-              <GiGearStickPattern className="mr-2" />
+              <PiEngineFill className="mr-2" />
               <p>{car.transmision}</p>
             </li>
           </div>
@@ -44,9 +45,12 @@ const CarCard = ({ car, price }) => {
           <span className="text-md font-semibold text-gray-800">
             Rp. {price}/hari
           </span>
-          <button className="text-blue-500 font-bold py-2 px-4 rounded-md">
-            Rental
-          </button>
+          <Link
+            to={`/pesan/${car._id}`}
+            className="text-blue-500 font-bold py-2 px-4 rounded-md"
+          >
+            <span>Rental</span>
+          </Link>
         </div>
       </div>
     </div>
