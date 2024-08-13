@@ -14,6 +14,7 @@ const UpdateCarForm = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const { id } = useParams();
+  console.log(id);
 
   useEffect(() => {
     const getCarById = async () => {

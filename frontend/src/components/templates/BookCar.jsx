@@ -168,7 +168,7 @@ const BookCar = () => {
           <CarCard
             key={car._id}
             car={car}
-            price={car.price}
+            price={car.price.toLocaleString().replace(/\,/g, ".")}
           />
         ))}
       </ul>

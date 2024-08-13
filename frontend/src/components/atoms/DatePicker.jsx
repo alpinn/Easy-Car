@@ -7,8 +7,12 @@ import { Button } from "../ui/button";
 import { Calendar } from "../ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 
-const DatePicker = () => {
-  const [date, setDate] = useState(new Date());
+const DatePicker = ({ value, onChange }) => {
+  const [date, setDate] = useState(value || new Date());
+  const handleSelect = (newDate) => {
+    setDate(newDate);
+    onChange(newDate);
+  };
   return (
     <Popover>
       <PopoverTrigger asChild>

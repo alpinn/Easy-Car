@@ -1,38 +1,99 @@
-import React from "react";
-import CarImg from "../../assets/car.png";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { Link, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import { FaRegUser } from "react-icons/fa6";
-import { GiGearStickPattern, GiCarDoor } from "react-icons/gi";
+import { GiCarDoor } from "react-icons/gi";
 import { PiEngine } from "react-icons/pi";
 import { BsFuelPump } from "react-icons/bs";
-import DatePicker from "../atoms/DatePicker";
-import { Link } from "react-router-dom";
 
 const PesananForm = () => {
+  const { id } = useParams();
+  const { user } = useSelector((state) => state.auth);
+  const [carData, setCarData] = useState({});
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phoneNumber: "",
+    pickUpDate: "",
+    pickUpTime: "",
+    dropOffDate: "",
+    dropOffTime: "",
+    car_id: id,
+  });
+
+  useEffect(() => {
+    if (user) {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        name: user.name,
+        email: user.email,
+      }));
+    }
+  }, [user]);
+
+  useEffect(() => {
+    console.log(id);
+    if (id) {
+      const getCarById = async () => {
+        try {
+          const response = await axios.get(`http://localhost:5000/cars/${id}`);
+          setCarData(response.data); // Update the carData state with the fetched data
+          console.log(response.data);
+        } catch (error) {
+          if (error.response) {
+            console.log(error);
+          }
+        }
+      };
+      getCarById();
+    }
+  }, [id]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log(formData);
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/pesan_mobil",
+        formData
+      );
+      console.log(response.data);
+      // handle success response
+    } catch (error) {
+      console.error(error.response.data);
+      // handle error response
+    }
+  };
+
   return (
     <div>
-      <form action="">
+      <form
+        action=""
+        onSubmit={handleSubmit}
+      >
         <div className="flex flex-col lg:flex-row overflow-hidden gap-14">
-          <div className="bg-white rounded-lg px-4 py-6 mb-4 shadow-md">
+          <div className="bg-white rounded-lg px-4 py-6 mb-4 shadow-md w-full">
             <div className="border rounded-lg py-2 pl-2 pr-20">
               <div className="flex flex-row items-center gap-4">
                 <div>
                   <img
-                    src={CarImg}
-                    alt="mobil"
+                    src={carData.image}
+                    alt="gambar mobil"
                     className="w-full h-32 object-cover rounded-lg"
                   />
                 </div>
                 <div>
                   <h2 className="font-semibold text-base mb-4 pb-2">
-                    Nama Mobil
+                    {carData.name}
                   </h2>
                   <div className="flex flex-row gap-10">
                     <div className="font-semibold text-sm">
                       <h3 className="uppercase  text-neutral-500">kursi</h3>
                       <div className="flex">
                         <li className="flex items-center">
-                          <p className="mr-2">3</p>
+                          <p className="mr-2">{carData.seat}</p>
                           <FaRegUser size={15} />
                         </li>
                       </div>
@@ -41,7 +102,7 @@ const PesananForm = () => {
                       <h3 className="uppercase  text-neutral-500">transmisi</h3>
                       <div className="flex">
                         <li className="flex items-center">
-                          <p className="mr-2">Manual</p>
+                          <p className="mr-2">{carData.transmision}</p>
                           <PiEngine size={15} />
                         </li>
                       </div>
@@ -50,7 +111,7 @@ const PesananForm = () => {
                       <h3 className="uppercase  text-neutral-500">pintu</h3>
                       <div className="flex">
                         <li className="flex items-center">
-                          <p className="mr-2">3</p>
+                          <p className="mr-2">{carData.door}</p>
                           <GiCarDoor size={15} />
                         </li>
                       </div>
@@ -61,7 +122,7 @@ const PesananForm = () => {
                       </h3>
                       <div className="flex">
                         <li className="flex items-center">
-                          <p className="mr-2">3</p>
+                          <p className="mr-2">{carData.fuel}</p>
                           <BsFuelPump size={15} />
                         </li>
                       </div>
@@ -79,6 +140,13 @@ const PesananForm = () => {
                   Nama Lengkap*
                 </label>
                 <input
+                  value={formData.name}
+                  onChange={(e) => {
+                    setFormData((prevFormData) => ({
+                      ...prevFormData,
+                      name: e.target.value.trim(),
+                    }));
+                  }}
                   type="text"
                   className="border h-9 border-gray-200 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-1"
                   required
@@ -91,6 +159,10 @@ const PesananForm = () => {
                       Email*
                     </label>
                     <input
+                      value={formData.email}
+                      onChange={(e) =>
+                        setFormData({ ...formData, email: e.target.value })
+                      }
                       type="email"
                       className="border border-gray-200 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full h-9 p-1"
                       required
@@ -100,18 +172,33 @@ const PesananForm = () => {
                     <label className="block mb-2 text-sm font-medium text-gray-900">
                       Tanggal Ambil*
                     </label>
-                    <DatePicker required />
+                    <input
+                      value={formData.pickUpDate}
+                      onChange={(e) => {
+                        setFormData({
+                          ...formData,
+                          pickUpDate: e.target.value,
+                        });
+                      }}
+                      type="date"
+                      className="border border-gray-200 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full h-9 p-1"
+                      required
+                      pattern="[0-9]{2}-[0-9]{2}-[0-9]{4}" // Add this attribute
+                    />
                   </div>
                   <div>
                     <label className="block mb-2 text-sm font-medium text-gray-900">
                       Waktu Ambil*
                     </label>
                     <input
+                      value={formData.pickUpTime}
                       type="time"
-                      step="900" // Add this attribute
-                      value="08:00"
+                      step="900"
                       className="border border-gray-200 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full h-9 p-1"
                       required
+                      onChange={(e) =>
+                        setFormData({ ...formData, pickUpTime: e.target.value })
+                      }
                     />
                   </div>
                 </div>
@@ -121,9 +208,16 @@ const PesananForm = () => {
                       Nomor HP/Telepon*
                     </label>
                     <input
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          phoneNumber: e.target.value,
+                        })
+                      }
+                      value={formData.phoneNumber}
                       type="text"
-                      className="border border-gray-200 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full h-9 p-1"
                       required
+                      className="border border-gray-200 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full h-9 p-1"
                     />
                   </div>
 
@@ -131,7 +225,19 @@ const PesananForm = () => {
                     <label className="block mb-2 text-sm font-medium text-gray-900">
                       Tanggal Kembali*
                     </label>
-                    <DatePicker required />
+                    <input
+                      value={formData.dropOffDate}
+                      onChange={(e) => {
+                        setFormData({
+                          ...formData,
+                          dropOffDate: e.target.value,
+                        });
+                      }}
+                      type="date"
+                      pattern="[0-9]{2}-[0-9]{2}-[0-9]{4}" // Add this attribute
+                      className="border border-gray-200 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full h-9 p-1"
+                      required
+                    />
                   </div>
                   <div>
                     <label className="block mb-2 text-sm font-medium text-gray-900">
@@ -140,7 +246,13 @@ const PesananForm = () => {
                     <input
                       type="time"
                       step="900" // Add this attribute
-                      value="08:00"
+                      value={formData.dropOffTime}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          dropOffTime: e.target.value,
+                        })
+                      }
                       className="border border-gray-200 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full h-9 p-1"
                       required
                     />
@@ -158,7 +270,7 @@ const PesananForm = () => {
                 <p className="uppercase text-neutral-500 text-sm mb-2">
                   Anda memilih mobil:
                 </p>
-                <span className="text-base">Nama Mobil</span>
+                <span className="text-base">{carData.name}</span>
               </div>
             </div>
             <div className="mb-5">
@@ -170,7 +282,9 @@ const PesananForm = () => {
             </div>
             <div className="flex flex-row justify-between font-bold text-green-500">
               <p>Total Harga:</p>
-              <span>Rp.</span>
+              <span>
+                Rp. {carData.price?.toLocaleString().replace(/\,/g, ".") || 0}{" "}
+              </span>
             </div>
             <button
               type="submit"
