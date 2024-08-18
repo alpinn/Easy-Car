@@ -14,29 +14,10 @@ const ManajemenSidebar = () => {
         </div>
       </Link>
       <div className="flex-1 py-8 flex flex-col gap-0.5">
-        <Link to="/dashboard/car">
-          <div className="flex items-center gap-2 px-3 py-2 rounded-sm hover:bg-[#333a47] ease-out duration-300">
-            <FaCarSide fontSize={24} />
-
-            <span className="text-lg">Mobil</span>
-          </div>
-        </Link>
-        <Link to="/dashboard/pesanan">
-          <div className="flex items-center gap-2 px-3 py-2 rounded-sm hover:bg-[#333a47] ease-out duration-300">
-            <FaListUl fontSize={24} />
-            <span className="text-lg">Pesanan</span>
-          </div>
-        </Link>
         <Link to="/dashboard/user">
           <div className="flex items-center gap-2 px-3 py-2 rounded-sm hover:bg-[#333a47] ease-out duration-300">
             <FaUser fontSize={24} />
             <span className="text-lg">User</span>
-          </div>
-        </Link>
-        <Link to="/dashboard/pertanyaan">
-          <div className="flex items-center gap-2 px-3 py-2 rounded-sm hover:bg-[#333a47] ease-out duration-300">
-            <MdQuestionAnswer fontSize={24} />
-            <span className="text-lg">Pertanyaan</span>
           </div>
         </Link>
       </div>

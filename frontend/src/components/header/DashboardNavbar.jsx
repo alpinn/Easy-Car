@@ -9,7 +9,7 @@ import { getMeAdmin } from "../../features/auth-slice.js";
 import { Button } from "../ui/button.jsx";
 
 import ProfileDropdown from "../atoms/ProfileDropdown.jsx";
-import ManajemenSidebar from "../sidebars/ManajemenSidebar.jsx";
+import ManajemenSidebar from "../sidebars/PesananSidebar.jsx";
 
 const DashboardNavbar = () => {
   const dispatch = useDispatch();

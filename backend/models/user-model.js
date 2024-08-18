@@ -18,8 +18,9 @@ const userSchema = mongoose.Schema({
         type: String,
         default: 'User',
     },
-    type: {
+    status: {
         type: String,
+        default: 'Pending',
     }
 })
 

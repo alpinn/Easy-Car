@@ -19,6 +19,14 @@ export const Login = async (req, res) => {
         const user = await User.findOne({ email });
     
         if (!user) return res.status(404).json({ msg: "User not found" });
+
+        if (user.status !== 'Approved') {
+            if (user.status === 'Rejected') {
+              return res.status(403).json({ msg: "Your account has been rejected" });
+            } else if (user.status === 'Pending') {
+              return res.status(403).json({ msg: "Your account is pending approval" });
+            }
+        }
     
         const isValid = await argon2.verify(user.password, password);
         if (!isValid) return res.status(400).json({ msg: "Email or password is incorrect" });
@@ -31,6 +39,7 @@ export const Login = async (req, res) => {
             name: user.name,
             email: user.email,
             role: user.role,
+            status: user.status,
         });
         } catch (error) {
             console.error(error);

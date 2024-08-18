@@ -53,29 +53,40 @@ export const createUser = async (req, res) => {
 export const updateUser = async (req, res) => {
     const user = await User.findById(req.params.id);
     if (!user) return res.status(404).json({ msg: "User not found" });
-
-    const { name, email, password, confirmPassword } = req.body;
-    let hashPassword;
-    if (password === "" || password === null) {
-        hashPassword = user.password;
-    } else {
-        if (password !== confirmPassword) return res.status(400).json({ msg: "Password and Confirm Password are don't match" });
-        hashPassword = await argon2.hash(password);
-    }
-
+  
+    const { password, confirmPassword } = req.body;
+    if (password !== confirmPassword) return res.status(400).json({ msg: "Password and Confirm Password are don't match" });
+  
+    const hashPassword = await argon2.hash(password);
+  
     try {
-        await User.updateOne({ _id: req.params.id }, {
-            $set: {
-                name,
-                email,
-                password: hashPassword
-            }
-        });
-        res.status(200).json({ msg: "User updated" });
+      await User.updateOne({ _id: req.params.id }, {
+        $set: {
+          password: hashPassword,
+        },
+      });
+      res.status(200).json({ msg: "Password updated" });
     } catch (error) {
-        res.status(400).json({ msg: error.message });
+      res.status(400).json({ msg: error.message });
     }
-}
+};
+
+export const updateStatusUser = async (req, res) => {
+    try {
+        const user = await User.findById(req.params.id);
+  
+        if (!user) return res.status(404).json({ msg: "User not found" });
+  
+      // Update pesanan
+      const { status } = req.body;
+      user.status = status;
+  
+      await user.save();
+      res.status(200).json({ msg: "User status updated successfully" });
+    } catch (error) {
+      res.status(500).json({ msg: error.message });
+    }
+};
 
 export const deleteUser = async (req, res) => {
     const user = await User.deleteOne({_id: req.params.id})

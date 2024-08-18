@@ -3,23 +3,38 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 
 const ChangePasswordForm = () => {
-  const [password, setPassword] = useState("");
-  const [confPassword, setconfPassword] = useState("");
-  const [msg, setMsg] = useState("");
-  const navigate = useNavigate();
-  const { id } = useParams();
+  const { id } = useParams(); // Get the id from the URL parameters
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
 
-  const updateUser = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (newPassword !== confirmPassword) {
+      setError("Password and Confirm Password do not match");
+      return;
+    }
+
     try {
-      await axios.patch(`http://localhost:5000/users/${id}`, {
-        password: password,
-        confirmPassword: confPassword,
-      });
-      navigate("/");
+      const response = await axios.put(
+        `http://localhost:5000/users/change-password/${id}`,
+        {
+          password: newPassword,
+          confirmPassword,
+        }
+      );
+
+      if (response.status === 200) {
+        setSuccess("Password updated successfully!");
+        setError(null);
+      }
     } catch (error) {
-      if (error.response) {
-        setMsg(error.response.data.msg);
+      if (error.response && error.response.data) {
+        setError(error.response.data.msg);
+      } else {
+        setError("An unknown error occurred");
       }
     }
   };
@@ -33,14 +48,17 @@ const ChangePasswordForm = () => {
           </h2>
 
           <div
-            className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4"
+            className=" text-green-700 text-center"
             role="alert"
-          ></div>
+          >
+            {" "}
+            {success && <p>{success}</p>}
+          </div>
           <form
-            onSubmit={updateUser}
+            onSubmit={handleSubmit}
             className="flex flex-col gap-4"
           >
-            <p className="text-center text-red-600">{msg}</p>
+            <p className="text-center text-red-600">{error}</p>
             <div>
               <label
                 htmlFor="password"
@@ -51,8 +69,8 @@ const ChangePasswordForm = () => {
               <input
                 type="password"
                 id="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
                 className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               />
             </div>
@@ -66,8 +84,8 @@ const ChangePasswordForm = () => {
               <input
                 type="password"
                 id="confPassword"
-                value={confPassword}
-                onChange={(e) => setconfPassword(e.target.value)}
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
                 className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               />
             </div>

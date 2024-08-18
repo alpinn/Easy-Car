@@ -12,6 +12,7 @@ const PesananForm = () => {
   const { id } = useParams();
   const { user } = useSelector((state) => state.auth);
   const [carData, setCarData] = useState({});
+  const [successMessage, setSuccessMessage] = useState(""); // Add this state
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -39,7 +40,10 @@ const PesananForm = () => {
       const getCarById = async () => {
         try {
           const response = await axios.get(`http://localhost:5000/cars/${id}`);
-          setCarData(response.data); // Update the carData state with the fetched data
+          setCarData(response.data);
+          setSuccessMessage(
+            "Pemesanan mobil berhasil! Silakan tunggu konfirmasi dari kami."
+          ); // Set the success message
           console.log(response.data);
         } catch (error) {
           if (error.response) {
@@ -261,7 +265,7 @@ const PesananForm = () => {
               </div>
             </div>
           </div>
-          <div className="bg-white w-1/3 h-fit p-4 mb-4 shadow-md rounded-lg">
+          <div className="bg-white w-full lg:w-1/3  h-fit p-4 mb-4 shadow-md rounded-lg">
             <h1 className="font-bold leading-relaxed text-lg mb-3">
               Deskripsi Pemesanan
             </h1>

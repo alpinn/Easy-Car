@@ -47,6 +47,8 @@ app.use(cors({
     origin: "http://localhost:5173"
 }))
 
+app.use('/images', express.static('images'));
+
 app.use(express.json())
 
 app.use(UserRoute)

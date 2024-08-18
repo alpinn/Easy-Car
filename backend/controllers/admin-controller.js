@@ -51,6 +51,21 @@ export const createAdmin = async (req, res) => {
     }
 }
 
+export const updateAdmin = async (req, res) => {
+    const { id } = req.params;
+    const { name } = req.body;
+    const { email } = req.body;
+    const { type } = req.body;
+  
+    try {
+      const admin = await Admin.findByIdAndUpdate(id, { name, email, type }, { new: true });
+      if (!admin) return res.status(404).json({ msg: "Admin not found" });
+      res.status(200).json({ msg: "Admin updated", admin });
+    } catch (error) {
+      res.status(400).json({ msg: error.message });
+    }
+}
+
 export const deleteAdmin = async (req, res) => {
     const admin = await Admin.deleteOne({_id: req.params.id})
     if(!admin) return res.status(404).json({msg: "Admin not found"});

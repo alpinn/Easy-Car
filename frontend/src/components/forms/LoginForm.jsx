@@ -6,6 +6,7 @@ import { LoginUser, reset } from "../../features/auth-slice.js";
 const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [msg, setMsg] = useState("");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -19,6 +20,21 @@ const LoginForm = () => {
       dispatch(reset());
     }
   }, [user, isSuccess, navigate, dispatch]);
+
+  useEffect(() => {
+    if (user) {
+      if (user.status === "rejected") {
+        // navigate to login page with error message
+        navigate("/login", { state: { error: "Your account is rejected" } });
+      } else if (user.status === "approved") {
+        // navigate to /
+        navigate("/");
+      } else if (user.status === "pending") {
+        // stay on login form with message
+        setMsg("Your account is pending approval");
+      }
+    }
+  }, [user, navigate]);
 
   const Auth = (e) => {
     e.preventDefault();
@@ -37,6 +53,7 @@ const LoginForm = () => {
           onSubmit={Auth}
         >
           {isError && <p className="text-center text-red-600">{message}</p>}
+          {msg && <p className="text-center text-gray-600">{msg}</p>}
           <div>
             <label
               htmlFor="email"

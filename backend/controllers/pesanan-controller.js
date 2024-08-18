@@ -16,7 +16,10 @@ export const getAllPesanan = async (req, res) => {
 export const getUserPesanan = async (req, res) => {
     try {
         const userId = req.session.userId;
-        const response = await Pesanan.find({ user_id: userId }).populate('car_id');
+        const response = await Pesanan.find({ user_id: userId }).populate('car_id').populate("user_id", "name");
+        if (response.length === 0) {
+          return res.status(404).json({ msg: 'No bookings found' });
+        }    
         res.status(200).json(response)
     } catch (error) {
         res.status(500).json({ msg: error.message })

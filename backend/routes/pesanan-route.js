@@ -4,7 +4,7 @@ import { getAllPesanan, getUserPesanan, createPesanan, getPesananById, updatePes
 const router = express.Router();
 
 router.get('/admin/pesanan', getAllPesanan)
-router.get('/user/pesanan', getUserPesanan)
+router.get('/user/pesanan/', getUserPesanan);
 router.get('/pesanan/:id', getPesananById)
 
 router.post('/pesan_mobil', createPesanan)

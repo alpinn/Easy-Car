@@ -30,7 +30,7 @@ const ProfileDropdown = () => {
     dispatch(LogOut());
     dispatch(reset());
     if (admin) {
-      navigate("/admin-login");
+      navigate("/admin");
     } else if (user) {
       navigate("/");
     }
@@ -56,12 +56,12 @@ const ProfileDropdown = () => {
             <DropdownMenuLabel>My Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem>
+              {/* <DropdownMenuItem>
                 <FaKey className="mr-2 h-4 w-4" />
                 <Link to="/change-password/:id">
                   <span>Ubah Password</span>
                 </Link>
-              </DropdownMenuItem>
+              </DropdownMenuItem> */}
               <DropdownMenuItem>
                 <FaPencil className="mr-2 h-4 w-4" />
                 <Link to="/testimonial">
@@ -70,7 +70,9 @@ const ProfileDropdown = () => {
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <PiCarProfileFill className="mr-2 h-4 w-4" />
-                <span>Riwayat Booking</span>
+                <Link to="/riwayat-booking">
+                  <span>Riwayat Booking</span>
+                </Link>
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />

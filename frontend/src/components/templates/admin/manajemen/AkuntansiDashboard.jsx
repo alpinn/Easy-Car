@@ -1,12 +1,12 @@
 import React from "react";
-import PesananSidebar from "../../../sidebars/PesananSidebar";
+import AkuntansiSidebar from "../../../sidebars/AkuntansiSidebar";
 import PesananTable from "../../../tables/PesananTable";
 
 const PesananListDashboard = () => {
   return (
     <div className="flex flex-row">
       <div>
-        <PesananSidebar />
+        <AkuntansiSidebar />
       </div>
       <div className="w-full h-[50rem] bg-neutral-200">
         <div className="mt-24 absolute pl-[2.3rem] lg:pl-[15rem]">

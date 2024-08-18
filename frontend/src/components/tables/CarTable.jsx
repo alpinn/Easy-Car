@@ -80,7 +80,7 @@ const CarTable = () => {
               {car.fuel}
             </TableCell>
             <TableCell className="font-medium text-center">
-              Rp. {car.price}
+              Rp. {car.price.toLocaleString().replace(/\,/g, ".")}
             </TableCell>
             <TableCell className="font-medium text-center">
               <div className="flex flex-row gap-2">

@@ -1,13 +1,13 @@
 import React from "react";
 import CarTable from "../../../../tables/CarTable";
-import ManajemenSidebar from "../../../../sidebars/ManajemenSidebar";
+import CarSidebar from "../../../../sidebars/CarSidebar";
 import { Link } from "react-router-dom";
 
 const CarListDashboard = () => {
   return (
     <div className="flex flex-row">
       <div>
-        <ManajemenSidebar />
+        <CarSidebar />
       </div>
       <div className="w-full min-h-screen bg-neutral-200">
         <div className="mt-24 absolute pl-[2.3rem] lg:pl-[16.2rem]">

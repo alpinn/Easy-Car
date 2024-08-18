@@ -61,6 +61,19 @@ export const getMe = createAsyncThunk("getMe", async(_, thunkAPI) => {
     }
 })
 
+// export const getMePesanan = createAsyncThunk("getMe", async(userId, thunkAPI) => {
+//     try {
+//       const response = await axios.get(`http://localhost:5000/me/${userId}`);
+//       // console.log(response.data)
+//         return response.data;
+//     } catch (error) {
+//         if(error.response){
+//             const message = error.response.data.msg
+//             return thunkAPI.rejectWithValue(message);
+//         }
+//     }
+// })
+
 export const getMeAdmin = createAsyncThunk("getMeAdmin", async(_, thunkAPI) => {
     try {
         const response = await axios.get('http://localhost:5000/admin/me')

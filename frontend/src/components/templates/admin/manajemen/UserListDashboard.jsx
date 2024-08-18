@@ -1,12 +1,12 @@
 import React from "react";
 import UserTable from "../../../tables/UserTable";
-import ManajemenSidebar from "../../../sidebars/ManajemenSidebar";
+import UserSidebars from "../../../sidebars/UserSidebars";
 
 const UserListDashboard = () => {
   return (
     <div className="flex flex-row">
       <div>
-        <ManajemenSidebar />
+        <UserSidebars />
       </div>
       <div className=" w-full min-h-screen bg-neutral-200">
         <div className="mt-24 absolute pl-[2.3rem] lg:pl-[16.2rem]">

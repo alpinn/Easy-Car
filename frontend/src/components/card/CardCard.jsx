@@ -5,12 +5,34 @@ import { GiCarDoor } from "react-icons/gi";
 import { BsFuelPumpFill } from "react-icons/bs";
 import { PiEngineFill } from "react-icons/pi";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const CarCard = ({ car, price }) => {
+  const { user } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
+
+  const handleRentalClick = () => {
+    try {
+      if (!user) {
+        // Store the redirect URL in localStorage
+        navigate("/login");
+      } else {
+        // User is logged in, navigate to rental page
+        navigate(`/pesan/${car._id.toString()}`);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const imageUrl = `/images/${car?.image}`;
+
   return (
     <div className="rounded-lg shadow-md border border-gray-200 overflow-hidden">
       <img
-        src={`/images/${car.image}`}
+        src={imageUrl}
         alt={car.name}
         className="w-full h-48 object-cover p-4 rounded-lg"
       />
@@ -45,12 +67,12 @@ const CarCard = ({ car, price }) => {
           <span className="text-md font-semibold text-gray-800">
             Rp. {price}/hari
           </span>
-          <Link
-            to={`/pesan/${car._id}`}
+          <button
+            onClick={handleRentalClick}
             className="text-blue-500 font-bold py-2 px-4 rounded-md"
           >
             <span>Rental</span>
-          </Link>
+          </button>
         </div>
       </div>
     </div>

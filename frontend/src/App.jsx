@@ -13,8 +13,7 @@ import Booking from "./pages/Booking";
 import Testimonial from "./pages/Testimonial";
 import ChangePassword from "./pages/ChangePassword";
 
-import ManajemenDashboard from "./pages/ManajemenDashboard";
-import UpdateDashboard from "./pages/UpdateDashboard";
+import AdminDashboard from "./pages/AdminDashboard";
 import AdminLogin from "./components/forms/AdminLoginForm";
 import CarDashboard from "./pages/CarDashboard";
 import PesananDashboard from "./pages/PesananDashboard";
@@ -22,7 +21,9 @@ import UserDashboard from "./pages/UserDashboard";
 import CarAddDashboard from "./pages/CarAddDashboard";
 import CarUpdateDashboard from "./pages/CarUpdateDashboard";
 import ContactUsDashboard from "./pages/ContactUsDashboard";
+import Akuntansi from "./pages/Akuntansi";
 import Pesanan from "./pages/Pesanan";
+import RiwayatBooking from "./pages/RiwayatBooking";
 
 function App() {
   return (
@@ -74,12 +75,8 @@ function App() {
             element={<AdminLogin />}
           />
           <Route
-            path="/admin-manajemen-dashboard"
-            element={<ManajemenDashboard />}
-          />
-          <Route
-            path="/admin-update-dashboard"
-            element={<UpdateDashboard />}
+            path="/admin-dashboard"
+            element={<AdminDashboard />}
           />
           <Route
             path="/dashboard/car"
@@ -102,12 +99,20 @@ function App() {
             element={<UserDashboard />}
           />
           <Route
+            path="/dashboard/akuntansi"
+            element={<Akuntansi />}
+          />
+          <Route
             path="/dashboard/pertanyaan"
             element={<ContactUsDashboard />}
           />
           <Route
             path="/pesan/:id"
             element={<Pesanan />}
+          />
+          <Route
+            path="/riwayat-booking"
+            element={<RiwayatBooking />}
           />
         </Routes>
       </BrowserRouter>

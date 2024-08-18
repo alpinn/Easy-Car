@@ -16,11 +16,20 @@ const LoginForm = () => {
   useEffect(() => {
     if (admin || isSuccess) {
       // Check the admin type and navigate to the corresponding dashboard
-      if (admin?.role === "Admin" && admin?.type === "Update") {
-        navigate("/admin-update-dashboard");
+      if (admin?.role === "Admin" && admin?.type === "Mobil") {
+        navigate("/dashboard/car");
         dispatch(reset());
-      } else if (admin?.role === "Admin" && admin?.type === "Manajemen") {
-        navigate("/admin-manajemen-dashboard");
+      } else if (admin?.role === "Admin" && admin?.type === "Pesanan") {
+        navigate("/dashboard/pesanan");
+        dispatch(reset());
+      } else if (admin?.role === "Admin" && admin?.type === "User") {
+        navigate("/dashboard/user");
+        dispatch(reset());
+      } else if (admin?.role === "Admin" && admin?.type === "Admin") {
+        navigate("/admin-dashboard");
+        dispatch(reset());
+      } else if (admin?.role === "Admin" && admin?.type === "Akuntansi") {
+        navigate("/dashboard/akuntansi");
         dispatch(reset());
       }
     }
