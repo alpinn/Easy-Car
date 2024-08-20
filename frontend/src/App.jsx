@@ -21,7 +21,6 @@ import UserDashboard from "./pages/UserDashboard";
 import CarAddDashboard from "./pages/CarAddDashboard";
 import CarUpdateDashboard from "./pages/CarUpdateDashboard";
 import ContactUsDashboard from "./pages/ContactUsDashboard";
-import Akuntansi from "./pages/Akuntansi";
 import Pesanan from "./pages/Pesanan";
 import RiwayatBooking from "./pages/RiwayatBooking";
 
@@ -97,10 +96,6 @@ function App() {
           <Route
             path="/dashboard/user"
             element={<UserDashboard />}
-          />
-          <Route
-            path="/dashboard/akuntansi"
-            element={<Akuntansi />}
           />
           <Route
             path="/dashboard/pertanyaan"

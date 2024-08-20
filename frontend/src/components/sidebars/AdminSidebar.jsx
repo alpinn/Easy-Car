@@ -1,8 +1,7 @@
 import React from "react";
 
-import { FaListUl } from "react-icons/fa6";
-import { FaUser, FaCarSide } from "react-icons/fa";
 import { GrUserAdmin } from "react-icons/gr";
+import { FaQuestionCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const AdminSidebar = () => {
@@ -17,8 +16,13 @@ const AdminSidebar = () => {
         <Link to="/admin-dashboard">
           <div className="flex items-center gap-2 px-3 py-2 rounded-sm hover:bg-[#333a47] ease-out duration-300">
             <GrUserAdmin fontSize={24} />
-
             <span className="text-lg">Approval</span>
+          </div>
+        </Link>
+        <Link to="/dashboard/pertanyaan">
+          <div className="flex items-center gap-2 px-3 py-2 rounded-sm hover:bg-[#333a47] ease-out duration-300">
+            <FaQuestionCircle fontSize={24} />
+            <span className="text-lg">Pertanyaan</span>
           </div>
         </Link>
       </div>

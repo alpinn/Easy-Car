@@ -40,10 +40,7 @@ const PesananForm = () => {
       const getCarById = async () => {
         try {
           const response = await axios.get(`http://localhost:5000/cars/${id}`);
-          setCarData(response.data);
-          setSuccessMessage(
-            "Pemesanan mobil berhasil! Silakan tunggu konfirmasi dari kami."
-          ); // Set the success message
+          setCarData(response.data); // Set the success message
           console.log(response.data);
         } catch (error) {
           if (error.response) {
@@ -64,6 +61,9 @@ const PesananForm = () => {
         formData
       );
       console.log(response.data);
+      setSuccessMessage(
+        "Pemesanan mobil berhasil! Silakan tunggu konfirmasi dari kami."
+      );
       // handle success response
     } catch (error) {
       console.error(error.response.data);
@@ -145,12 +145,7 @@ const PesananForm = () => {
                 </label>
                 <input
                   value={formData.name}
-                  onChange={(e) => {
-                    setFormData((prevFormData) => ({
-                      ...prevFormData,
-                      name: e.target.value.trim(),
-                    }));
-                  }}
+                  readOnly
                   type="text"
                   className="border h-9 border-gray-200 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-1"
                   required
@@ -164,9 +159,7 @@ const PesananForm = () => {
                     </label>
                     <input
                       value={formData.email}
-                      onChange={(e) =>
-                        setFormData({ ...formData, email: e.target.value })
-                      }
+                      readOnly
                       type="email"
                       className="border border-gray-200 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full h-9 p-1"
                       required
@@ -296,6 +289,11 @@ const PesananForm = () => {
             >
               Request Mobil
             </button>
+            {successMessage && (
+              <div className="text-green-500 font-bold text-sm mt-2">
+                {successMessage}
+              </div>
+            )}
           </div>
         </div>
       </form>
