@@ -23,6 +23,7 @@ import CarUpdateDashboard from "./pages/CarUpdateDashboard";
 import ContactUsDashboard from "./pages/ContactUsDashboard";
 import Pesanan from "./pages/Pesanan";
 import RiwayatBooking from "./pages/RiwayatBooking";
+import ApprovalDashboard from "./pages/ApprovalDashboard";
 
 function App() {
   return (
@@ -100,6 +101,10 @@ function App() {
           <Route
             path="/dashboard/pertanyaan"
             element={<ContactUsDashboard />}
+          />
+          <Route
+            path="/dashboard/approval"
+            element={<ApprovalDashboard />}
           />
           <Route
             path="/pesan/:id"

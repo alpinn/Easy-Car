@@ -13,7 +13,7 @@ const AdminSidebar = () => {
         </div>
       </Link>
       <div className="flex-1 py-8 flex flex-col gap-0.5">
-        <Link to="/admin-dashboard">
+        <Link to="/dashboard/approval">
           <div className="flex items-center gap-2 px-3 py-2 rounded-sm hover:bg-[#333a47] ease-out duration-300">
             <GrUserAdmin fontSize={24} />
             <span className="text-lg">Approval</span>
