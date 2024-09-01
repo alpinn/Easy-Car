@@ -39,9 +39,9 @@ const CarTable = () => {
       <TableHeader>
         <TableRow>
           <TableHead>No</TableHead>
-          <TableHead className="w-[100px] text-center">Gambar</TableHead>
+          <TableHead className="w-[150px] text-center">Gambar</TableHead>
           <TableHead className="w-[150px] text-center">Nama Mobil</TableHead>
-          <TableHead className="w-[125px] text-center">Jumlah Kursi</TableHead>
+          <TableHead className="w-[85px] text-center">Jumlah Kursi</TableHead>
           <TableHead className="w-[140px] text-center">
             Jenis Transmisi
           </TableHead>
@@ -59,9 +59,9 @@ const CarTable = () => {
             </TableCell>
             <TableCell className="font-medium text-center">
               <img
-                src={`/images/${car.image}`}
+                src={`http://localhost:5000/images/${car.image}`}
                 alt={car.name}
-                className="w-full h-24 object-cover p-4 rounded-lg"
+                className="w-full object-cover p-4 rounded-lg"
               />
             </TableCell>
             <TableCell className="font-medium text-center">
@@ -80,7 +80,7 @@ const CarTable = () => {
               {car.fuel}
             </TableCell>
             <TableCell className="font-medium text-center">
-              Rp. {car.price.toLocaleString().replace(/\,/g, ".")}
+              Rp. {car.price.toLocaleString().replace(/,/g, ".")}
             </TableCell>
             <TableCell className="font-medium text-center">
               <div className="flex flex-row gap-2">

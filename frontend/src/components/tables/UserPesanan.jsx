@@ -43,10 +43,9 @@ const UserPesanan = () => {
     <Table className="bg-white">
       <TableHeader>
         <TableRow>
-          <TableHead>No</TableHead>
-          <TableHead className="w-[100px] text-center">ID Pesanan</TableHead>
-          <TableHead className="w-[100px] text-center">Nama Pemesan</TableHead>
-          <TableHead className="w-[125px] text-center">Nama Mobil</TableHead>
+          <TableHead className="w-[30px] text-center">No</TableHead>
+          <TableHead className="w-[80px] text-center">ID Pesanan</TableHead>
+          <TableHead className="w-[130px] text-center">Nama Mobil</TableHead>
           <TableHead className="w-[100px] text-center">Nomor Telepon</TableHead>
           <TableHead className="w-[120px] text-center">Tanggal Ambil</TableHead>
           <TableHead className="w-[120px] text-center">
@@ -66,9 +65,6 @@ const UserPesanan = () => {
               {pesanan._id}
             </TableCell>
             <TableCell className="font-medium text-center">
-              {pesanan.user_id.name}
-            </TableCell>
-            <TableCell className="font-medium text-center">
               {pesanan.car_id.name}
             </TableCell>
             <TableCell className="font-medium text-center">
@@ -82,9 +78,17 @@ const UserPesanan = () => {
             </TableCell>
             <TableCell className="font-medium text-center">
               Rp.{" "}
-              {pesanan.car_id.price?.toLocaleString().replace(/\,/g, ".") || 0}{" "}
+              {pesanan.car_id.price?.toLocaleString().replace(/,/g, ".") || 0}{" "}
             </TableCell>
-            <TableCell className="font-medium text-center">
+            <TableCell
+              className={`font-bold text-center ${
+                pesanan.order === "Approved"
+                  ? "text-green-500"
+                  : pesanan.order === "Rejected"
+                  ? "text-red-500"
+                  : ""
+              }`}
+            >
               {pesanan.order}
             </TableCell>
           </TableRow>

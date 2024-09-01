@@ -27,14 +27,14 @@ const CarCard = ({ car, price }) => {
     }
   };
 
-  const imageUrl = `/images/${car?.image}`;
+  const imageUrl = `http://localhost:5000/images/${car?.image}`;
 
   return (
     <div className="rounded-lg shadow-md border border-gray-200 overflow-hidden">
       <img
         src={imageUrl}
         alt={car.name}
-        className="w-full h-48 object-cover p-4 rounded-lg"
+        className="w-full h-48 object-contain p-4 rounded-lg"
       />
       <div className="">
         <div className="flex justify-between items-center">

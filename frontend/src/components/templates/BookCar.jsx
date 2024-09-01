@@ -72,7 +72,7 @@ const BookCar = () => {
     }));
   };
   return (
-    <div className="container mx-auto px-14 py-16 md:px-16 lg:px-20">
+    <div className="container mx-auto px-14 py-16 md:px-16 lg:px-28">
       <div className="flex-1">
         <input
           type="search"
@@ -168,7 +168,7 @@ const BookCar = () => {
           <CarCard
             key={car._id}
             car={car}
-            price={car.price.toLocaleString().replace(/\,/g, ".")}
+            price={car.price.toLocaleString().replace(/,/g, ".")}
           />
         ))}
       </ul>

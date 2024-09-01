@@ -4,7 +4,8 @@ import session from "express-session"
 import dotenv from "dotenv"
 import MongoStore from "connect-mongo"
 import connectToMongoDB from "./config/database.js"
-
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
 import UserRoute from "./routes/user-route.js"
 import AdminRoute from "./routes/admin-route.js"
 import AuthRoute from "./routes/auth-route.js"
@@ -16,7 +17,10 @@ import PesananRoute from "./routes/pesanan-route.js"
 dotenv.config()
 
 const app = express();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
+app.use('/images', express.static(join(__dirname, 'images')));
 
 connectToMongoDB().then(() => {
     app.use((err, req, res, next) => {
@@ -47,7 +51,6 @@ app.use(cors({
     origin: "http://localhost:5173"
 }))
 
-app.use('/images', express.static('images'));
 
 app.use(express.json())
 

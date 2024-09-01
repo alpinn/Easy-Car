@@ -116,9 +116,9 @@ const PesananTable = () => {
                 className="bg-blue-500 text-white p-2 rounded"
                 value={selectedStatus[pesanan._id] || ""}
                 onChange={(e) => handleStatusChange(e, pesanan._id)}
-                disabled={
-                  pesanan.order === "Approved" || pesanan.order === "Rejected"
-                }
+                // disabled={
+                //   pesanan.order === "Approved" || pesanan.order === "Rejected"
+                // }
               >
                 <option value="">Select Status</option>
                 <option value="Approved">Approved</option>

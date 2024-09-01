@@ -7,6 +7,7 @@ import { FaRegUser } from "react-icons/fa6";
 import { GiCarDoor } from "react-icons/gi";
 import { PiEngine } from "react-icons/pi";
 import { BsFuelPump } from "react-icons/bs";
+import { IoWarning } from "react-icons/io5";
 
 const PesananForm = () => {
   const { id } = useParams();
@@ -258,42 +259,66 @@ const PesananForm = () => {
               </div>
             </div>
           </div>
-          <div className="bg-white w-full lg:w-1/3  h-fit p-4 mb-4 shadow-md rounded-lg">
-            <h1 className="font-bold leading-relaxed text-lg mb-3">
-              Deskripsi Pemesanan
-            </h1>
-            <div className="mb-1">
-              <div className="font-semibold">
-                <p className="uppercase text-neutral-500 text-sm mb-2">
-                  Anda memilih mobil:
+          <div className="w-full lg:w-1/3">
+            <div className="bg-white w-full p-4 shadow-xl rounded-md mb-8">
+              <div className="flex w-full gap-2 items-center mb-2">
+                <IoWarning
+                  color="red"
+                  size={25}
+                />
+                <h1 className="font-bold text-base">Syarat & Ketentuan</h1>
+              </div>
+              <div className="leading-relaxed">
+                <p>
+                  <span className="font-semibold">1.</span> Pembayaran hanya
+                  bisa melalui transfer bank
                 </p>
-                <span className="text-base">{carData.name}</span>
+                <p>
+                  <span className="font-semibold">2.</span> Bukti pembayaran
+                  bisa di screenshot kirim ke{" "}
+                  <span className="font-bold">WhatsApp Kami</span> atau{" "}
+                  <span className="font-bold">0123456789</span>
+                </p>
               </div>
             </div>
-            <div className="mb-5">
-              <Link to="/book-car">
-                <p className="text-sm text-blue-400 font-semibold">
-                  Ganti mobil
-                </p>
-              </Link>
-            </div>
-            <div className="flex flex-row justify-between font-bold text-green-500">
-              <p>Total Harga:</p>
-              <span>
-                Rp. {carData.price?.toLocaleString().replace(/\,/g, ".") || 0}{" "}
-              </span>
-            </div>
-            <button
-              type="submit"
-              className="bg-blue-700 hover:bg-blue-800 p-3 w-full mt-5 text-white rounded-lg font-bold text-sm"
-            >
-              Request Mobil
-            </button>
-            {successMessage && (
-              <div className="text-green-500 font-bold text-sm mt-2">
-                {successMessage}
+            <div className="bg-white shadow-md p-4 h-fit rounded-lg">
+              <h1 className="font-bold leading-relaxed text-lg mb-3">
+                Deskripsi Pemesanan
+              </h1>
+              <div className="mb-1">
+                <div className="font-semibold">
+                  <p className="uppercase text-neutral-500 text-sm mb-2">
+                    Anda memilih mobil:
+                  </p>
+                  <span className="text-base">{carData.name}</span>
+                </div>
               </div>
-            )}
+              <div className="mb-2">
+                <Link to="/book-car">
+                  <p className="text-sm text-blue-400 font-semibold">
+                    Ganti mobil
+                  </p>
+                </Link>
+              </div>
+              <p className="font-bold mb-2">BCA - 987654321 (Easy Car)</p>
+              <div className="flex flex-row justify-between font-bold text-green-500">
+                <p>Total Harga:</p>
+                <span>
+                  Rp. {carData.price?.toLocaleString().replace(/,/g, ".") || 0}{" "}
+                </span>
+              </div>
+              <button
+                type="submit"
+                className="bg-blue-700 hover:bg-blue-800 p-3 w-full mt-5 text-white rounded-lg font-bold text-sm"
+              >
+                Request Mobil
+              </button>
+              {successMessage && (
+                <div className="text-green-500 font-bold text-sm mt-2">
+                  {successMessage}
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </form>
